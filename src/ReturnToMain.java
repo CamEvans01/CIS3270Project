@@ -2,6 +2,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import java.awt.Color;
 import javax.swing.JButton;
@@ -11,7 +12,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
-public class Return_To_Main {
+//class used to return to main menu. 
+
+public class ReturnToMain extends MainMenu{
 
 	 private JFrame frame;
 
@@ -30,11 +33,12 @@ public class Return_To_Main {
 			}
 		});
 	}
-
+	JFormattedTextField txtAdminUsername;
+	JTextPane txtAdminPassword;
 	/**
 	 * Create the application.
 	 */
-	public Return_To_Main() {
+	public ReturnToMain() {
 		initialize();
 	}
 
@@ -78,6 +82,21 @@ public class Return_To_Main {
 		JButton btnAdminLogin = new JButton("Login");
 		btnAdminLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				VerifyInput ans1 = new VerifyInput();
+				String adminUsername = txtAdminUsername.getText();
+				String checkPassword = txtAdminPassword.getText();
+				String actualPassword = Queries.fetchAdminPassword(adminUsername);
+				ans1.setCheckPassword(checkPassword);
+				ans1.setPassword(actualPassword);
+				if(ans1.Verification()) {
+					AdminScreen fr = new AdminScreen();
+					fr.newScreen();
+					frame.dispose();
+				}else {
+					JOptionPane.showMessageDialog(null, "incorrect answer", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				
+				
 			}
 		});
 		btnAdminLogin.setBounds(62, 330, 117, 29);
@@ -127,19 +146,30 @@ public class Return_To_Main {
 		separator.setOrientation(SwingConstants.VERTICAL);
 		separator.setBackground(Color.BLACK);
 		separator.setForeground(Color.BLACK);
-		separator.setBounds(301, 78, 10, 351);
+		separator.setBounds(301, 78, 10, 412);
 		frame.getContentPane().add(separator);
 		
-		JButton btnForgot_Password = new JButton("Forgot Password");
-		btnForgot_Password.addActionListener(new ActionListener() {
+		JButton btnForgot_Password_Admin = new JButton("Forgot Password");
+		btnForgot_Password_Admin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Forgot_Password fr = new Forgot_Password();
+				AdminForgotPassword fr = new AdminForgotPassword();
 				fr.newScreen();
 				frame.dispose();
 				}
 		});
-		btnForgot_Password.setBounds(240, 473, 129, 29);
-		frame.getContentPane().add(btnForgot_Password);
+		btnForgot_Password_Admin.setBounds(69, 471, 129, 29);
+		frame.getContentPane().add(btnForgot_Password_Admin);
+		
+		JButton btnForgotPassword_Customer = new JButton("Forgot Password");
+		btnForgotPassword_Customer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CustomerForgotPassword fr = new CustomerForgotPassword();
+				fr.newScreen();
+				frame.dispose();
+			}
+		});
+		btnForgotPassword_Customer.setBounds(426, 471, 135, 29);
+		frame.getContentPane().add(btnForgotPassword_Customer);
 		
 		
 		}

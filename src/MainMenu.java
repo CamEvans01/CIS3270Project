@@ -2,6 +2,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import java.awt.Color;
 import javax.swing.JButton;
@@ -10,10 +11,12 @@ import javax.swing.JFormattedTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
-
+//startup screen
 public class MainMenu {
-
+	
 	JFrame frame;
+	JFormattedTextField txtAdminUsername;
+	JTextPane txtAdminPassword;
 
 	/**
 	 * Launch the application.
@@ -30,7 +33,7 @@ public class MainMenu {
 			}
 		});
 	}
-
+	
 	/**
 	 * Create the application.
 	 */
@@ -78,6 +81,36 @@ public class MainMenu {
 		JButton btnAdminLogin = new JButton("Login");
 		btnAdminLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					//create verifyInput object to verify username and password
+					VerifyInput ans1 = new VerifyInput();							
+					String adminUsername = txtAdminUsername.getText();
+					String checkPassword = txtAdminPassword.getText();
+					String actualPassword = Queries.fetchAdminPassword(adminUsername);
+					ans1.setCheckPassword(checkPassword);
+					ans1.setPassword(actualPassword);
+
+					if (ans1.Verification()) {									
+						 
+						//create object to hold admins username as class variable
+						ValueObject vo1 = new ValueObject(adminUsername);		   
+						
+						//open admins main screen
+						AdminScreen fr = new AdminScreen();
+						fr.newScreen();											 
+						frame.dispose();
+						
+					//show wrong password pop up	
+					} else {
+						JOptionPane.showMessageDialog(null, "incorrect password", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+					//show miscelaneous login error	
+				} catch (Exception exc) {
+					exc.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Enter Credentials", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+
 			}
 		});
 		btnAdminLogin.setBounds(62, 330, 117, 29);
@@ -86,8 +119,9 @@ public class MainMenu {
 		JButton btnAdminRegister = new JButton("Register");
 		btnAdminRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				Register_Admin fr = new Register_Admin();
+				
+				//launch register admin screen
+				AdminRegister fr = new AdminRegister();
 				fr.newScreen();
 				frame.dispose();
 
@@ -107,7 +141,9 @@ public class MainMenu {
 		JButton btnCustomerRegister = new JButton("Register");
 		btnCustomerRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Register_Customer fr = new Register_Customer();
+				
+				//launch customer register screen
+				CustomerRegister fr = new CustomerRegister();
 				fr.newScreen();
 				frame.dispose();
 			}
@@ -115,13 +151,13 @@ public class MainMenu {
 		btnCustomerRegister.setBounds(426, 400, 117, 29);
 		frame.getContentPane().add(btnCustomerRegister);
 
-		JTextPane textPane = new JTextPane();
-		textPane.setBounds(62, 270, 117, 16);
-		frame.getContentPane().add(textPane);
+		txtAdminPassword = new JTextPane();
+		txtAdminPassword.setBounds(62, 270, 117, 16);
+		frame.getContentPane().add(txtAdminPassword);
 
-		JFormattedTextField formattedTextField = new JFormattedTextField();
-		formattedTextField.setBounds(62, 178, 117, 26);
-		frame.getContentPane().add(formattedTextField);
+		txtAdminUsername = new JFormattedTextField();
+		txtAdminUsername.setBounds(62, 178, 117, 26);
+		frame.getContentPane().add(txtAdminUsername);
 
 		JFormattedTextField formattedTextField_1 = new JFormattedTextField();
 		formattedTextField_1.setBounds(426, 170, 117, 26);
@@ -135,20 +171,35 @@ public class MainMenu {
 		separator.setOrientation(SwingConstants.VERTICAL);
 		separator.setBackground(Color.BLACK);
 		separator.setForeground(Color.BLACK);
-		separator.setBounds(301, 78, 10, 351);
+		separator.setBounds(301, 78, 12, 412);
 		frame.getContentPane().add(separator);
 
-		JButton btnForgot_Password = new JButton("Forgot Password");
-		btnForgot_Password.addActionListener(new ActionListener() {
+		JButton btnForgot_Password_Admin = new JButton("Forgot Password");
+		btnForgot_Password_Admin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Forgot_Password fr = new Forgot_Password();
+				
+				//launch admin forgot password screen
+				AdminForgotPassword fr = new AdminForgotPassword();
 				fr.newScreen();
 				frame.dispose();
 			}
 		});
-		btnForgot_Password.setBounds(240, 473, 129, 29);
-		frame.getContentPane().add(btnForgot_Password);
+		btnForgot_Password_Admin.setBounds(62, 461, 129, 29);
+		frame.getContentPane().add(btnForgot_Password_Admin);
+
+		JButton btnForgotPassword_Customer = new JButton("Forgot Password");
+		btnForgotPassword_Customer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//launch customer forgot password screen
+				CustomerForgotPassword fr = new CustomerForgotPassword();
+				fr.newScreen();
+				frame.dispose();
+			}
+		});
+		btnForgotPassword_Customer.setBounds(418, 461, 135, 29);
+		frame.getContentPane().add(btnForgotPassword_Customer);
 
 	}
+	}
 
-}

@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class My_Account {
+public class CustomerMyAccount {
 
 	private JFrame frame;
 
@@ -21,7 +21,7 @@ public class My_Account {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					My_Account window = new My_Account();
+					CustomerMyAccount window = new CustomerMyAccount();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,7 +33,7 @@ public class My_Account {
 	/**
 	 * Create the application.
 	 */
-	public My_Account() {
+	public CustomerMyAccount() {
 		initialize();
 	}
 
@@ -67,7 +67,7 @@ public class My_Account {
 		JButton btnGo_Back = new JButton("Go Back");
 		btnGo_Back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Customer_Screen c1 = new Customer_Screen();
+				CustomerScreen c1 = new CustomerScreen();
 				c1.newScreen();
 				frame.dispose();
 			}

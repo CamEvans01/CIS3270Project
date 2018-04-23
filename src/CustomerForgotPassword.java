@@ -1,6 +1,6 @@
 import java.awt.EventQueue;
 
-
+import javax.swing.JFrame;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -11,8 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JFormattedTextField;
 
-public class Forgot_Password extends JFrame{
-
+public class CustomerForgotPassword extends JFrame{
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -24,7 +23,7 @@ public class Forgot_Password extends JFrame{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Forgot_Password window = new Forgot_Password();
+					CustomerForgotPassword window = new CustomerForgotPassword();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,7 +35,7 @@ public class Forgot_Password extends JFrame{
 	/**
 	 * Create the application.
 	 */
-	public Forgot_Password() {
+	public CustomerForgotPassword() {
 		initialize();
 	}
 
@@ -49,8 +48,8 @@ public class Forgot_Password extends JFrame{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblForgotPassword = new JLabel("Forgot Password");
-		lblForgotPassword.setBounds(236, 35, 113, 16);
+		JLabel lblForgotPassword = new JLabel("Customer Forgot Password");
+		lblForgotPassword.setBounds(202, 35, 183, 16);
 		frame.getContentPane().add(lblForgotPassword);
 		
 		JLabel lbEnter_Username = new JLabel("Enter Username");
@@ -101,14 +100,14 @@ public class Forgot_Password extends JFrame{
 		lblNewLabel_1.setBounds(45, 379, 97, 16);
 		frame.getContentPane().add(lblNewLabel_1);
 		
-		JFormattedTextField formattedTextField = new JFormattedTextField();
-		formattedTextField.setBounds(202, 379, 166, 21);
-		frame.getContentPane().add(formattedTextField);
+		JFormattedTextField txtPassword = new JFormattedTextField();
+		txtPassword.setBounds(202, 379, 166, 21);
+		frame.getContentPane().add(txtPassword);
 		
 		JButton btnReturnToLogin = new JButton("Return to Login");
 		btnReturnToLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Return_To_Main m1 = new Return_To_Main();
+				ReturnToMain m1 = new ReturnToMain();
 				m1.returnHome();
 				frame.dispose();
 				

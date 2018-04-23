@@ -1,16 +1,16 @@
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
-public class Register_Admin extends JFrame{
+public class CustomerRegister extends JFrame {
 
-	private JFrame frame;
+    private JFrame frame;
 	private JTextField txtFirst_Name;
 	private JTextField txtLast_Name;
 	private JTextField txtAddress;
@@ -29,7 +29,7 @@ public class Register_Admin extends JFrame{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Register_Admin window = new Register_Admin();
+					CustomerRegister window = new CustomerRegister();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +41,7 @@ public class Register_Admin extends JFrame{
 	/**
 	 * Create the application.
 	 */
-	public Register_Admin() {
+	public CustomerRegister() {
 		initialize();
 	}
 
@@ -54,10 +54,10 @@ public class Register_Admin extends JFrame{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewAdmnin = new JLabel("New Admin");
-		lblNewAdmnin.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewAdmnin.setBounds(271, 6, 95, 16);
-		frame.getContentPane().add(lblNewAdmnin);
+		JLabel btnNew_Customer = new JLabel("New Customer");
+		btnNew_Customer.setHorizontalAlignment(SwingConstants.CENTER);
+		btnNew_Customer.setBounds(271, 6, 110, 16);
+		frame.getContentPane().add(btnNew_Customer);
 		
 		JLabel lblNewLabel = new JLabel("First Name");
 		lblNewLabel.setBounds(37, 75, 80, 16);
@@ -156,7 +156,7 @@ public class Register_Admin extends JFrame{
 		JButton btnMainMenu = new JButton("Main Menu");
 		btnMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Return_To_Main m1 = new Return_To_Main();
+				ReturnToMain m1 = new ReturnToMain();
 				m1.returnHome();
 				frame.dispose();
 			}

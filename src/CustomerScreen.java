@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-public class Customer_Screen extends JFrame{
+public class CustomerScreen extends JFrame{
 	
 	private JFrame frame;
 
@@ -21,7 +21,7 @@ public class Customer_Screen extends JFrame{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Customer_Screen window = new Customer_Screen();
+					CustomerScreen window = new CustomerScreen();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,7 +33,7 @@ public class Customer_Screen extends JFrame{
 	/**
 	 * Create the application.
 	 */
-	public Customer_Screen() {
+	public CustomerScreen() {
 		initialize();
 	}
 
