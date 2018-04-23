@@ -5,28 +5,27 @@ import javax.swing.ListModel;
 
 //class to hold all queries 
 public class Queries {
-	
-	//query to add flight to Flights table using critera from Flights object
+
+	// query to add flight to Flights table using critera from Flights object
 	public static void addFlights(Flights f1) {
 
 		Connection myConn = null;
 		PreparedStatement pst = null;
 		try {
-			
+
 			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
 					"sql9232857", "JvbZyaTgLR");
 
-			
 			Statement myStmt = myConn.createStatement();
-			
-			//insert data into Flights table
+
+			// insert data into Flights table
 			String query = "insert into Flights (departure_city, departure_date, departure_time, arrival_city, arrival_date, arrival_time)"
 					+ "values (?, ?, ?, ?,?,?)";
 
-			
 			pst = myConn.prepareStatement(query);
 
-			//prepared statements to enter data into flights table. Used to put data where values is a question mark
+			// prepared statements to enter data into flights table. Used to put data where
+			// values is a question mark
 			pst.setString(1, (f1.getDepartureCity()));
 			pst.setString(2, f1.getDepartureDate());
 			pst.setString(3, f1.getDepartureTime());
@@ -34,39 +33,52 @@ public class Queries {
 			pst.setString(5, f1.getArrivalDate());
 			pst.setString(6, f1.getArrivalTime());
 
-			//update table
+			// update table
 			pst.executeUpdate();
 
 		}
 
 		catch (Exception exc) {
 			exc.printStackTrace();
-		}
+		} finally {
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					/* ignored */}
+				if (myConn != null) {
+					try {
+						myConn.close();
+					} catch (SQLException e) {
+						/* ignored */}
 
+				}
+			}
+
+		}
 	}
 
-	//query to book a flight based on flight criteria. Criteria is from Flights table 
+	// query to book a flight based on flight criteria. Criteria is from Flights
+	// table
 	public static void bookFlight(int idFlight, String username, String departureCity, String departureDate,
 			String departureTime, String arrivalCity, String arrivalDate, String arrivalTime) {
 		Connection myConn = null;
 		PreparedStatement pst = null;
 		try {
-			
 
 			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
 					"sql9232857", "JvbZyaTgLR");
 
-			
 			Statement myStmt = myConn.createStatement();
-			
-			//insert data into Bookings table
+
+			// insert data into Bookings table
 
 			String query = "insert into Bookings (idFlights, username, departure_city, departure_date, departure_time,  "
 					+ "arrival_city, arrival_date,arrival_time)" + "values (?, ?, ?, ?, ?, ?, ?, ?)";
 
 			pst = myConn.prepareStatement(query);
 
-			//insert data into table where it is a question mark in query
+			// insert data into table where it is a question mark in query
 			pst.setInt(1, (idFlight));
 			pst.setString(2, (ValueObject.bookingUsername));
 			pst.setString(3, (departureCity));
@@ -76,31 +88,44 @@ public class Queries {
 			pst.setString(7, (arrivalDate));
 			pst.setString(8, (arrivalTime));
 
-			//update
+			// update
 			pst.executeUpdate();
 
 		}
 
 		catch (Exception exc) {
 			exc.printStackTrace();
+		} finally {
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					/* ignored */}
+				if (myConn != null) {
+					try {
+						myConn.close();
+					} catch (SQLException e) {
+						/* ignored */}
+
+				}
+			}
 		}
+
 	}
 
-	//query to show all personal flights
+	// query to show all personal flights
 	public static ResultSet showMyFlights() {
 		Connection myConn = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		try {
-			
 
 			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
 					"sql9232857", "JvbZyaTgLR");
 
-			
 			Statement myStmt = myConn.createStatement();
 
-			//show all flights given this criteria given the user's username
+			// show all flights given this criteria given the user's username
 			String query = "select idFlights, departure_city, departure_date, departure_time,  "
 					+ "arrival_city, arrival_date, arrival_time from Bookings where username = '"
 					+ ValueObject.bookingUsername + "'";
@@ -109,7 +134,7 @@ public class Queries {
 
 			rs = pst.executeQuery();
 
-			//return result
+			// return result
 			return rs;
 
 		}
@@ -122,88 +147,108 @@ public class Queries {
 
 	}
 
-	//query to remove personal flight given id of flight
+	// query to remove personal flight given id of flight
 	public static void removeMyFlight(int idNumber) {
 		Connection myConn = null;
 		PreparedStatement pst = null;
 		try {
-			
 
 			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
 					"sql9232857", "JvbZyaTgLR");
 
-			
 			Statement myStmt = myConn.createStatement();
-			
-			
-			//delete flight from personal account given flight id number
+
+			// delete flight from personal account given flight id number
 			String query = "delete from Bookings where idFlights = '" + idNumber + "'";
 
 			pst = myConn.prepareStatement(query);
-			
-			//update
+
+			// update
 			pst.executeUpdate();
 
 		}
 
 		catch (Exception exc) {
 			exc.printStackTrace();
+		} finally {
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					/* ignored */}
+				if (myConn != null) {
+					try {
+						myConn.close();
+					} catch (SQLException e) {
+						/* ignored */}
+
+				}
+			}
 		}
 
 	}
 
-	//query to remove flight from Flights table given flight's id number
+	// query to remove flight from Flights table given flight's id number
 	public static void removeFlight(int idNumber) {
 		Connection myConn = null;
 		PreparedStatement pst = null;
 		try {
-			
 
 			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
 					"sql9232857", "JvbZyaTgLR");
 
-			
 			Statement myStmt = myConn.createStatement();
 
-			//delete flight given id number from Flights table
+			// delete flight given id number from Flights table
 			String query = "delete from Flights where idFlights = '" + idNumber + "'";
 
 			pst = myConn.prepareStatement(query);
-			
-			//update 
+
+			// update
 			pst.executeUpdate();
 
 		}
 
 		catch (Exception exc) {
 			exc.printStackTrace();
+		} finally {
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					/* ignored */}
+				if (myConn != null) {
+					try {
+						myConn.close();
+					} catch (SQLException e) {
+						/* ignored */}
+
+				}
+			}
 		}
 
 	}
 
-	//query to search flights given city name
+	// query to search flights given city name
 	public static ResultSet searchByDepartureCity(String city) {
 		Connection myConn = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		try {
-			
 
 			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
 					"sql9232857", "JvbZyaTgLR");
 
-			
 			Statement myStmt = myConn.createStatement();
 
-			//select all flights with matching city name
+			// select all flights with matching city name
 			String query = "select * from Flights where departure_city = '" + city + "'";
 
 			pst = myConn.prepareStatement(query);
 
-			
 			rs = pst.executeQuery();
 
-			//return result
+			// return result
 			return rs;
 
 		}
@@ -211,12 +256,11 @@ public class Queries {
 		catch (Exception exc) {
 			exc.printStackTrace();
 		}
-
-		return null;
+			return null;
 
 	}
 
-	//show all flights from Flights table
+	// show all flights from Flights table
 	public static ResultSet showFLights() {
 		Connection myConn = null;
 		PreparedStatement pst = null;
@@ -227,17 +271,16 @@ public class Queries {
 			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
 					"sql9232857", "JvbZyaTgLR");
 
-			
 			Statement myStmt = myConn.createStatement();
 
-			//select all flights from Flights table
+			// select all flights from Flights table
 			String query = "select * from Flights";
 
 			pst = myConn.prepareStatement(query);
 
 			rs = pst.executeQuery();
 
-			//return result
+			// return result
 			return rs;
 
 		}
@@ -245,12 +288,11 @@ public class Queries {
 		catch (Exception exc) {
 			exc.printStackTrace();
 		}
-
 		return null;
 
 	}
 
-	//check if flight exists based on city
+	// check if flight exists based on city
 	public static boolean checkFlight(String city) {
 		Connection myConn = null;
 		PreparedStatement pst = null;
@@ -260,17 +302,16 @@ public class Queries {
 			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
 					"sql9232857", "JvbZyaTgLR");
 
-			
 			Statement myStmt = myConn.createStatement();
 
-			//select flights from Flights table given city name
+			// select flights from Flights table given city name
 			String query = "select * from Flights where departure_city = '" + city + "'";
 
 			pst = myConn.prepareStatement(query);
 
 			rs = pst.executeQuery();
 
-			//if the city exists, return true
+			// if the city exists, return true
 			if (rs.next()) {
 				return true;
 			} else {
@@ -280,34 +321,45 @@ public class Queries {
 
 		catch (Exception exc) {
 			exc.printStackTrace();
-		}
+		} finally {
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					/* ignored */}
+				if (myConn != null) {
+					try {
+						myConn.close();
+					} catch (SQLException e) {
+						/* ignored */}
+				}
 
-		
+				}
+			}
+
 		return false;
 	}
 
-	//check if the flight exists based on an id
+	// check if the flight exists based on an id
 	public static boolean checkFlightId(int id) {
 		Connection myConn = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		try {
-			
 
 			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
 					"sql9232857", "JvbZyaTgLR");
 
-			
 			Statement myStmt = myConn.createStatement();
 
-			//select all flights from Flights given id
+			// select all flights from Flights given id
 			String query = "select * from Flights where idFlights = '" + id + "'";
 
 			pst = myConn.prepareStatement(query);
 
 			rs = pst.executeQuery();
 
-			//true if flight exists
+			// true if flight exists
 			if (rs.next()) {
 				return true;
 			} else {
@@ -317,26 +369,38 @@ public class Queries {
 
 		catch (Exception exc) {
 			exc.printStackTrace();
+		} finally {
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					/* ignored */}
+				if (myConn != null) {
+					try {
+						myConn.close();
+					} catch (SQLException e) {
+						/* ignored */}
+
+				}
+			}
 		}
 
 		return false;
 	}
 
-	//check if flight in personal account exists based on id
+	// check if flight in personal account exists based on id
 	public static boolean checkMyFlightId(int id) {
 		Connection myConn = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		try {
-			
 
 			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
 					"sql9232857", "JvbZyaTgLR");
 
-			
 			Statement myStmt = myConn.createStatement();
-			
-			//select all flights from Bookings table with given flight id
+
+			// select all flights from Bookings table with given flight id
 
 			String query = "select * from Bookings where idFlights = '" + id + "'";
 
@@ -344,7 +408,7 @@ public class Queries {
 
 			rs = pst.executeQuery();
 
-			//true if flight is in personal account 
+			// true if flight is in personal account
 			if (rs.next()) {
 				return true;
 			} else {
@@ -354,32 +418,44 @@ public class Queries {
 
 		catch (Exception exc) {
 			exc.printStackTrace();
+		} finally {
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					/* ignored */}
+				if (myConn != null) {
+					try {
+						myConn.close();
+					} catch (SQLException e) {
+						/* ignored */}
+
+				}
+			}
 		}
 
 		return false;
 	}
 
-	//query to create new admin
+	// query to create new admin
 	public static void newAdmin(ValueObject vo) {
 		Connection myConn = null;
 		PreparedStatement pst = null;
 		try {
-			
 
 			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
 					"sql9232857", "JvbZyaTgLR");
 
-			
 			Statement myStmt = myConn.createStatement();
-			
-			//insert data into Admins table
+
+			// insert data into Admins table
 
 			String query = "insert into Admins (first_name, last_name, address, zip, state, username, password, email, ssn, question, answer)"
 					+ "values (?,?,?,?,?,?,?,?,?,?,?)";
 
 			pst = myConn.prepareStatement(query);
 
-			//insert data into query where values is a question mark
+			// insert data into query where values is a question mark
 			pst.setString(1, vo.getFirstName());
 			pst.setString(2, vo.getLastName());
 			pst.setString(3, vo.getAddress());
@@ -392,30 +468,43 @@ public class Queries {
 			pst.setString(10, vo.getQuestion());
 			pst.setString(11, vo.getAnswer());
 
-			//update
+			// update
 			pst.executeUpdate();
 		}
 
 		catch (Exception exc) {
 			exc.printStackTrace();
+		} finally {
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					/* ignored */}
+				if (myConn != null) {
+					try {
+						myConn.close();
+					} catch (SQLException e) {
+						/* ignored */}
+
+				}
+			}
 		}
+
 	}
 
-	//query to find password admin password
+	// query to find password admin password
 	public static String forgotAdminPassword(String username) {
 		Connection myConn = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		try {
-			
 
 			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
 					"sql9232857", "JvbZyaTgLR");
 
-			
 			Statement myStmt = myConn.createStatement();
-			
-			//retriece question from database for user
+
+			// retriece question from database for user
 
 			String query = "select question from Admins where username = '" + username + "'";
 
@@ -423,7 +512,7 @@ public class Queries {
 
 			rs = pst.executeQuery(query);
 
-			//return result
+			// return result
 			rs.next();
 			String question = rs.getString("question");
 
@@ -432,13 +521,27 @@ public class Queries {
 
 		catch (Exception exc) {
 			exc.printStackTrace();
+		} finally {
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					/* ignored */}
+				if (myConn != null) {
+					try {
+						myConn.close();
+					} catch (SQLException e) {
+						/* ignored */}
+
+				}
+			}
 		}
 
 		return null;
 
 	}
 
-	//query to find answer to security question for admin
+	// query to find answer to security question for admin
 	public static String adminAnswer(String username) {
 		Connection myConn = null;
 		PreparedStatement pst = null;
@@ -447,17 +550,16 @@ public class Queries {
 			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
 					"sql9232857", "JvbZyaTgLR");
 
-			
 			Statement myStmt = myConn.createStatement();
 
-			//select answer from Admins table given username
+			// select answer from Admins table given username
 			String query = "select answer from Admins where username = '" + username + "'";
 
 			pst = myConn.prepareStatement(query);
 
 			rs = pst.executeQuery(query);
 
-			//return result
+			// return result
 			rs.next();
 			String answer = rs.getString("answer");
 
@@ -466,12 +568,26 @@ public class Queries {
 
 		catch (Exception exc) {
 			exc.printStackTrace();
+		} finally {
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					/* ignored */}
+				if (myConn != null) {
+					try {
+						myConn.close();
+					} catch (SQLException e) {
+						/* ignored */}
+
+				}
+			}
 		}
 
 		return null;
 	}
 
-	//retrieve password for admin
+	// retrieve password for admin
 	public static String fetchAdminPassword(String username) {
 		Connection myConn = null;
 		PreparedStatement pst = null;
@@ -496,13 +612,27 @@ public class Queries {
 
 		catch (Exception exc) {
 			exc.printStackTrace();
+		} finally {
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					/* ignored */}
+				if (myConn != null) {
+					try {
+						myConn.close();
+					} catch (SQLException e) {
+						/* ignored */}
+
+				}
+			}
 		}
 
 		return null;
 
 	}
 
-	//find departure city for flight given id
+	// find departure city for flight given id
 	public static String fetchDepartureCity(int id) {
 		Connection myConn = null;
 		PreparedStatement pst = null;
@@ -510,41 +640,39 @@ public class Queries {
 			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
 					"sql9232857", "JvbZyaTgLR");
 
-			
 			Statement myStmt = myConn.createStatement();
 
-			//find flight city in Flights table
+			// find flight city in Flights table
 			String query = "select departure_city from Flights where idFlights = '" + id + "'";
 
 			pst = myConn.prepareStatement(query);
 
 			ResultSet rs = pst.executeQuery(query);
 
-			//return result
+			// return result
 			rs.next();
 			String departureCity = rs.getString("departure_city");
 
-			
 			return departureCity;
 		}
 
 		catch (Exception exc) {
 			exc.printStackTrace();
-			
-		//close the connection
-		} finally {
 
+			// close the connection
+		} finally {
 			if (pst != null) {
 				try {
 					pst.close();
 				} catch (SQLException e) {
 					/* ignored */}
-			}
-			if (myConn != null) {
-				try {
-					myConn.close();
-				} catch (SQLException e) {
-					/* ignored */}
+				if (myConn != null) {
+					try {
+						myConn.close();
+					} catch (SQLException e) {
+						/* ignored */}
+
+				}
 			}
 		}
 
@@ -552,7 +680,7 @@ public class Queries {
 
 	}
 
-	//finde departure date given id
+	// finde departure date given id
 	public static String fetchDepartureDate(int id) {
 		Connection myConn = null;
 		PreparedStatement pst = null;
@@ -561,17 +689,16 @@ public class Queries {
 			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
 					"sql9232857", "JvbZyaTgLR");
 
-			
 			Statement myStmt = myConn.createStatement();
 
-			//find departure date in Flights table given id
+			// find departure date in Flights table given id
 			String query = "select departure_date from Flights where idFlights = '" + id + "'";
 
 			pst = myConn.prepareStatement(query);
 
 			rs = pst.executeQuery(query);
 
-			//return results
+			// return results
 			rs.next();
 			String departureDate = rs.getString("departure_date");
 
@@ -580,28 +707,28 @@ public class Queries {
 
 		catch (Exception exc) {
 			exc.printStackTrace();
-			
-			//close connection
-		} finally {
 
+			// close connection
+		} finally {
 			if (pst != null) {
 				try {
 					pst.close();
 				} catch (SQLException e) {
 					/* ignored */}
-			}
-			if (myConn != null) {
-				try {
-					myConn.close();
-				} catch (SQLException e) {
-					/* ignored */}
+				if (myConn != null) {
+					try {
+						myConn.close();
+					} catch (SQLException e) {
+						/* ignored */}
+
+				}
 			}
 		}
 		return null;
 
 	}
 
-	//find departure time given id
+	// find departure time given id
 	public static String fetchDepartureTime(int id) {
 		Connection myConn = null;
 		PreparedStatement pst = null;
@@ -610,28 +737,26 @@ public class Queries {
 			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
 					"sql9232857", "JvbZyaTgLR");
 
-			
 			Statement myStmt = myConn.createStatement();
 
-			//find departure time in Flights given id query
+			// find departure time in Flights given id query
 			String query = "select departure_time from Flights where idFlights = '" + id + "'";
 
 			pst = myConn.prepareStatement(query);
 
 			rs = pst.executeQuery(query);
 
-			//return result
+			// return result
 			rs.next();
 			String departureTime = rs.getString("departure_time");
 
 			return departureTime;
 		}
 
-		
 		catch (Exception exc) {
 			exc.printStackTrace();
-			
-			//close connection
+
+			// close connection
 		} finally {
 
 			if (pst != null) {
@@ -652,7 +777,7 @@ public class Queries {
 
 	}
 
-	//find arrival city given id
+	// find arrival city given id
 	public static String fetchArrivalCity(int id) {
 		Connection myConn = null;
 		PreparedStatement pst = null;
@@ -661,17 +786,16 @@ public class Queries {
 			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
 					"sql9232857", "JvbZyaTgLR");
 
-			
 			Statement myStmt = myConn.createStatement();
 
-			//find arrival city for Flights table given id
+			// find arrival city for Flights table given id
 			String query = "select arrival_city from Flights where idFlights = '" + id + "'";
 
 			pst = myConn.prepareStatement(query);
 
 			rs = pst.executeQuery(query);
 
-			//return result
+			// return result
 			rs.next();
 			String arrivalCity = rs.getString("arrival_city");
 
@@ -680,8 +804,8 @@ public class Queries {
 
 		catch (Exception exc) {
 			exc.printStackTrace();
-			
-			//close connection
+
+			// close connection
 		} finally {
 
 			if (pst != null) {
@@ -702,7 +826,7 @@ public class Queries {
 
 	}
 
-	//find arrival date given id
+	// find arrival date given id
 	public static String fetchArrivalDate(int id) {
 		Connection myConn = null;
 		PreparedStatement pst = null;
@@ -711,17 +835,16 @@ public class Queries {
 			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
 					"sql9232857", "JvbZyaTgLR");
 
-			
 			Statement myStmt = myConn.createStatement();
 
-			//find arrival date given id in Flights table
+			// find arrival date given id in Flights table
 			String query = "select arrival_date from Flights where idFlights = '" + id + "'";
 
 			pst = myConn.prepareStatement(query);
 
 			rs = pst.executeQuery(query);
 
-			//return result
+			// return result
 			rs.next();
 			String arrivalDate = rs.getString("arrival_date");
 
@@ -730,8 +853,8 @@ public class Queries {
 
 		catch (Exception exc) {
 			exc.printStackTrace();
-			
-			//close connection
+
+			// close connection
 		} finally {
 
 			if (pst != null) {
@@ -752,7 +875,7 @@ public class Queries {
 
 	}
 
-	//find arrival time given id
+	// find arrival time given id
 	public static String fetchArrivalTime(int id) {
 		Connection myConn = null;
 		PreparedStatement pst = null;
@@ -761,17 +884,16 @@ public class Queries {
 			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
 					"sql9232857", "JvbZyaTgLR");
 
-			
 			Statement myStmt = myConn.createStatement();
 
-			//find arrival time from Flights table given id
+			// find arrival time from Flights table given id
 			String query = "select arrival_time from Flights where idFlights = '" + id + "'";
 
 			pst = myConn.prepareStatement(query);
 
 			rs = pst.executeQuery(query);
 
-			//return result
+			// return result
 			rs.next();
 			String arrivalTime = rs.getString("arrival_time");
 
@@ -780,8 +902,8 @@ public class Queries {
 
 		catch (Exception exc) {
 			exc.printStackTrace();
-			
-			//close connection
+
+			// close connection
 		} finally {
 
 			if (pst != null) {

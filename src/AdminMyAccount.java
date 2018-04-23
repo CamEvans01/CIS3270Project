@@ -117,7 +117,7 @@ public class AdminMyAccount {
 		frame.getContentPane().add(lblRemoveFlightid);
 		
 		txtRemoveFlight = new JTextField();
-		txtRemoveFlight.setBounds(160, 387, 130, 26);
+		txtRemoveFlight.setBounds(171, 387, 130, 26);
 		frame.getContentPane().add(txtRemoveFlight);
 		txtRemoveFlight.setColumns(10);
 		

@@ -51,6 +51,8 @@ public class CustomerSearchFlights {
 	
 
 	private JTable table;
+	private JTextField textField;
+	private JTextField txtBookFlight;
 
 	/**
 	 * Initialize the contents of the frame.
@@ -74,12 +76,8 @@ public class CustomerSearchFlights {
 		frame.getContentPane().add(separator);
 		
 		JLabel lbDeparture_City = new JLabel("Departure City");
-		lbDeparture_City.setBounds(69, 269, 102, 16);
+		lbDeparture_City.setBounds(69, 284, 102, 16);
 		frame.getContentPane().add(lbDeparture_City);
-		
-		JLabel lbDestination_City = new JLabel("Destination City");
-		lbDestination_City.setBounds(69, 316, 102, 16);
-		frame.getContentPane().add(lbDestination_City);
 		
 		JButton btnGo_Back = new JButton("Go Back");
 		btnGo_Back.addActionListener(new ActionListener() {
@@ -92,13 +90,13 @@ public class CustomerSearchFlights {
 		btnGo_Back.setBounds(6, 443, 117, 29);
 		frame.getContentPane().add(btnGo_Back);
 		
-		JButton btnAdd_Flight = new JButton("Book Flight");
-		btnAdd_Flight.addActionListener(new ActionListener() {
+		JButton btnAddFlight = new JButton("Book Flight");
+		btnAddFlight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnAdd_Flight.setBounds(301, 360, 117, 29);
-		frame.getContentPane().add(btnAdd_Flight);
+		btnAddFlight.setBounds(416, 360, 117, 29);
+		frame.getContentPane().add(btnAddFlight);
 		
 		JButton btnShowAllFlights = new JButton("Show all Flights");
 		btnShowAllFlights.addActionListener(new ActionListener() {
@@ -113,24 +111,41 @@ public class CustomerSearchFlights {
 			}
 	}
 		});
-		btnShowAllFlights.setBounds(121, 360, 143, 29);
+		btnShowAllFlights.setBounds(216, 307, 143, 29);
 		frame.getContentPane().add(btnShowAllFlights);
 		
 		table = new JTable();
 		table.setBounds(6, 34, 588, 154);
 		frame.getContentPane().add(table);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(212, 265, 361, 27);
-		frame.getContentPane().add(comboBox);
+		JLabel lblSearch = new JLabel("Search");
+		lblSearch.setBounds(261, 247, 61, 16);
+		frame.getContentPane().add(lblSearch);
 		
-		JComboBox DestinationBox = new JComboBox();
-		DestinationBox.setBounds(212, 312, 159, 27);
-		frame.getContentPane().add(DestinationBox);
+		textField = new JTextField();
+		textField.setBounds(205, 279, 182, 26);
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setForeground(Color.BLACK);
+		separator_1.setBackground(Color.BLACK);
+		separator_1.setBounds(6, 332, 588, 16);
+		frame.getContentPane().add(separator_1);
+		
+		JButton btnSearchCity = new JButton("Search");
+		btnSearchCity.setBounds(416, 279, 117, 29);
+		frame.getContentPane().add(btnSearchCity);
+		
+		txtBookFlight = new JTextField();
+		txtBookFlight.setBounds(205, 363, 182, 26);
+		frame.getContentPane().add(txtBookFlight);
+		txtBookFlight.setColumns(10);
+		
+		JLabel lblBookFlightid = new JLabel("Book Flight (id)");
+		lblBookFlightid.setBounds(62, 365, 111, 16);
+		frame.getContentPane().add(lblBookFlightid);
 	}
-	
-		
-	
 }
 	
 

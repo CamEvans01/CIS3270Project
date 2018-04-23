@@ -64,6 +64,13 @@ public class CustomerScreen extends JFrame{
 		frame.getContentPane().add(btnSearch);
 		
 		JButton btnLogout = new JButton("Logout");
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ReturnToMain m1 = new ReturnToMain();
+				m1.returnHome();
+				frame.dispose();
+			}
+		});
 		btnLogout.setBounds(6, 343, 117, 29);
 		frame.getContentPane().add(btnLogout);
 	}

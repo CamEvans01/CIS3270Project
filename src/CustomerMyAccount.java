@@ -13,6 +13,8 @@ import java.awt.event.ActionEvent;
 public class CustomerMyAccount {
 
 	private JFrame frame;
+	private JTable table;
+	private JTextField txtRemoveFlight;
 
 	/**
 	 * Launch the application.
@@ -56,12 +58,12 @@ public class CustomerMyAccount {
 		lblBookedFlights.setBounds(247, 105, 110, 16);
 		frame.getContentPane().add(lblBookedFlights);
 		
-		JList list = new JList();
-		list.setBounds(100, 160, 450, 180);
-		frame.getContentPane().add(list);
-		
 		JButton btnRemove_Flight = new JButton("Remove Flight");
-		btnRemove_Flight.setBounds(259, 375, 117, 29);
+		btnRemove_Flight.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnRemove_Flight.setBounds(334, 375, 117, 29);
 		frame.getContentPane().add(btnRemove_Flight);
 		
 		JButton btnGo_Back = new JButton("Go Back");
@@ -74,5 +76,30 @@ public class CustomerMyAccount {
 		});
 		btnGo_Back.setBounds(6, 493, 117, 29);
 		frame.getContentPane().add(btnGo_Back);
+		
+		table = new JTable();
+		table.setBounds(6, 157, 594, 186);
+		frame.getContentPane().add(table);
+		
+		JButton btnShowFlights = new JButton("Show FLights");
+		btnShowFlights.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnShowFlights.setBounds(247, 61, 117, 29);
+		frame.getContentPane().add(btnShowFlights);
+		
+		JLabel lbRemoveFlight = new JLabel("Remove Flight (id)");
+		lbRemoveFlight.setBounds(34, 380, 117, 16);
+		frame.getContentPane().add(lbRemoveFlight);
+		
+		txtRemoveFlight = new JTextField();
+		txtRemoveFlight.setColumns(10);
+		txtRemoveFlight.setBounds(171, 375, 130, 26);
+		frame.getContentPane().add(txtRemoveFlight);
+		
+		JButton btnRefresh = new JButton("Refresh");
+		btnRefresh.setBounds(463, 375, 117, 29);
+		frame.getContentPane().add(btnRefresh);
 	}
 }
