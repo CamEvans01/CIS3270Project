@@ -52,12 +52,22 @@ public class CustomerScreen extends JFrame{
 		frame.getContentPane().add(lbWelcome);
 		
 		JButton btnMyAccount = new JButton("My Account");
+		btnMyAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CustomerMyAccount cma1 = new CustomerMyAccount();
+				cma1.newScreen();
+				frame.dispose();
+			}
+		});
 		btnMyAccount.setBounds(112, 86, 130, 50);
 		frame.getContentPane().add(btnMyAccount);
 		
 		JButton btnSearch = new JButton("Search Flights");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CustomerSearchFlights csf1 = new CustomerSearchFlights();
+				csf1.newScreen();
+				frame.dispose();
 			}
 		});
 		btnSearch.setBounds(112, 200, 130, 50);

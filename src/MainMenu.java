@@ -11,14 +11,15 @@ import javax.swing.JFormattedTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+import javax.swing.JTextField;
 //startup screen
 public class MainMenu {
 	
 	JFrame frame;
 	JFormattedTextField txtAdminUsername;
 	JTextPane txtAdminPassword;
-	JFormattedTextField txtCustomerUsername;
-	JTextPane txtCustomerPassword;
+	private JTextField txtCustomerUsername;
+	private JTextField txtCustomerPassword;
 	/**
 	 * Launch the application.
 	 */
@@ -89,7 +90,7 @@ public class MainMenu {
 					VerifyInput ans1 = new VerifyInput();							
 					String adminUsername = txtAdminUsername.getText();
 					String checkPassword = txtAdminPassword.getText();
-					System.out.println(adminUsername);
+					//System.out.println(adminUsername);
 
 					String actualPassword = Queries.fetchAdminPassword(adminUsername);
 					ans1.setCheckPassword(checkPassword);
@@ -206,30 +207,7 @@ public class MainMenu {
 		txtAdminUsername.setBounds(62, 178, 117, 26);
 		frame.getContentPane().add(txtAdminUsername);
 		
-		txtCustomerPassword = new JTextPane();
-		txtCustomerPassword.setBounds(62, 270, 117, 16);
-		frame.getContentPane().add(txtCustomerPassword);
-
-		txtCustomerUsername = new JFormattedTextField();
-		txtCustomerUsername.setBounds(62, 178, 117, 26);
-		frame.getContentPane().add(txtCustomerUsername);
-
-		JFormattedTextField formattedTextField_1 = new JFormattedTextField();
-		formattedTextField_1.setBounds(426, 170, 117, 26);
-		frame.getContentPane().add(formattedTextField_1);
-
-		JFormattedTextField formattedTextField_2 = new JFormattedTextField();
-		formattedTextField_2.setBounds(426, 270, 117, 26);
-		frame.getContentPane().add(formattedTextField_2);
-	
-//		JFormattedTextField formattedTextField_3 = new JFormattedTextField();
-//		formattedTextField_3.setBounds(426, 170, 117, 26);
-//		frame.getContentPane().add(formattedTextField_3);
-//
-//		JFormattedTextField formattedTextField_4 = new JFormattedTextField();
-//		formattedTextField_4.setBounds(426, 270, 117, 26);
-//		frame.getContentPane().add(formattedTextField_4);
-
+		
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
 		separator.setBackground(Color.BLACK);
@@ -262,6 +240,16 @@ public class MainMenu {
 		});
 		btnForgotPassword_Customer.setBounds(418, 461, 135, 29);
 		frame.getContentPane().add(btnForgotPassword_Customer);
+		
+		txtCustomerUsername = new JTextField();
+		txtCustomerUsername.setBounds(418, 170, 130, 26);
+		frame.getContentPane().add(txtCustomerUsername);
+		txtCustomerUsername.setColumns(10);
+		
+		txtCustomerPassword = new JTextField();
+		txtCustomerPassword.setBounds(418, 260, 130, 26);
+		frame.getContentPane().add(txtCustomerPassword);
+		txtCustomerPassword.setColumns(10);
 
 	}
 	}

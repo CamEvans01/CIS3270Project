@@ -62,8 +62,10 @@ public class CustomerMyAccount {
 		
 	// For removing a flight for a customer 
 		
-		JButton btnRemove_Flight = new JButton("Remove Flight");
-		btnRemove_Flight.addActionListener(new ActionListener() {
+		JButton btnRemoveFlight = new JButton("Remove Flight");
+		btnRemoveFlight.addActionListener(new ActionListener() {
+			
+			//button to remove this customer's flight from Bookings table
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Remove Flight Button Pressed");
 				
@@ -93,8 +95,8 @@ public class CustomerMyAccount {
 			}
 		});
 		
-		btnRemove_Flight.setBounds(334, 375, 117, 29);
-		frame.getContentPane().add(btnRemove_Flight);
+		btnRemoveFlight.setBounds(334, 375, 117, 29);
+		frame.getContentPane().add(btnRemoveFlight);
 		
 		JButton btnGo_Back = new JButton("Go Back");
 		btnGo_Back.addActionListener(new ActionListener() {
@@ -113,6 +115,8 @@ public class CustomerMyAccount {
 		
 		JButton btnShowFlights = new JButton("Show FLights");
 		btnShowFlights.addActionListener(new ActionListener() {
+			
+			//button to show all flights from this customer based on customer's username that is saved as bookingUsername in valueObject class.
 			public void actionPerformed(ActionEvent e) {
 				
 				System.out.println("Show Flights Button Pressed");
@@ -126,12 +130,19 @@ public class CustomerMyAccount {
 		lbRemoveFlight.setBounds(34, 380, 117, 16);
 		frame.getContentPane().add(lbRemoveFlight);
 		
+		//text field for user to enter the id of flight to be removed
 		txtRemoveFlight = new JTextField();
 		txtRemoveFlight.setColumns(10);
 		txtRemoveFlight.setBounds(171, 375, 130, 26);
 		frame.getContentPane().add(txtRemoveFlight);
 		
 		JButton btnRefresh = new JButton("Refresh");
+		btnRefresh.addActionListener(new ActionListener() {
+			
+			//button to refresh table
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnRefresh.setBounds(463, 375, 117, 29);
 		frame.getContentPane().add(btnRefresh);
 	}

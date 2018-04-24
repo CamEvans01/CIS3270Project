@@ -51,7 +51,7 @@ public class CustomerSearchFlights {
 	
 
 	private JTable table;
-	private JTextField textField;
+	private JTextField txtDepartureCity;
 	private JTextField txtBookFlight;
 
 	/**
@@ -90,19 +90,23 @@ public class CustomerSearchFlights {
 		btnGo_Back.setBounds(6, 443, 117, 29);
 		frame.getContentPane().add(btnGo_Back);
 		
-		JButton btnAddFlight = new JButton("Book Flight");
-		btnAddFlight.addActionListener(new ActionListener() {
+		JButton btnBookFlight = new JButton("Book Flight");
+		btnBookFlight.addActionListener(new ActionListener() {
+			
+			//button to to book flight and add it to Bookings table
 			public void actionPerformed(ActionEvent e) {
 				
 				System.out.println("Book Flight Button Pressed");
 				
 			}
 		});
-		btnAddFlight.setBounds(416, 360, 117, 29);
-		frame.getContentPane().add(btnAddFlight);
+		btnBookFlight.setBounds(416, 360, 117, 29);
+		frame.getContentPane().add(btnBookFlight);
 		
 		JButton btnShowAllFlights = new JButton("Show all Flights");
 		btnShowAllFlights.addActionListener(new ActionListener() {
+			
+			//button to show all flights available from Flights table
 			public void actionPerformed(ActionEvent e) {
 				try {
 					
@@ -125,10 +129,11 @@ public class CustomerSearchFlights {
 		lblSearch.setBounds(261, 247, 61, 16);
 		frame.getContentPane().add(lblSearch);
 		
-		textField = new JTextField();
-		textField.setBounds(205, 279, 182, 26);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		//text field for user to type in departure city
+		txtDepartureCity = new JTextField();
+		txtDepartureCity.setBounds(205, 279, 182, 26);
+		frame.getContentPane().add(txtDepartureCity);
+		txtDepartureCity.setColumns(10);
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setForeground(Color.BLACK);
@@ -137,9 +142,17 @@ public class CustomerSearchFlights {
 		frame.getContentPane().add(separator_1);
 		
 		JButton btnSearchCity = new JButton("Search");
+		btnSearchCity.addActionListener(new ActionListener() {
+			
+			//button to show all flights in Flight table
+			public void actionPerformed(ActionEvent e) {
+			
+			}
+		});
 		btnSearchCity.setBounds(416, 279, 117, 29);
 		frame.getContentPane().add(btnSearchCity);
 		
+		//text field to hold the flight id of the flight the user wishes to book 
 		txtBookFlight = new JTextField();
 		txtBookFlight.setBounds(205, 363, 182, 26);
 		frame.getContentPane().add(txtBookFlight);

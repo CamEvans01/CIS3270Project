@@ -26,7 +26,7 @@ public class AdminSearchFlights {
 	private JFrame frame;
 	private JTable table;
 	private JTextField txtSearchCity;
-	private JTextField txtFlightId;
+	private JTextField txtBookFlight;
 
 	/**
 	 * Launch the application.
@@ -90,13 +90,13 @@ public class AdminSearchFlights {
 		btnGo_Back.setBounds(6, 443, 117, 29);
 		frame.getContentPane().add(btnGo_Back);
 
-		JButton btnAdd_Flight = new JButton("Book Flight");
+		JButton btnBookFlight = new JButton("Book Flight");
 		
-		btnAdd_Flight.addActionListener(new ActionListener() {
+		btnBookFlight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				//get flights id from text field and parse to int value
-				String stringidFlight = txtFlightId.getText();
+				String stringidFlight = txtBookFlight.getText();
 				int idFlight = Integer.parseInt(stringidFlight);
 				
 				//send flight id to queries to gather information
@@ -130,8 +130,8 @@ public class AdminSearchFlights {
 				
 			}
 		});
-		btnAdd_Flight.setBounds(427, 377, 117, 29);
-		frame.getContentPane().add(btnAdd_Flight);
+		btnBookFlight.setBounds(427, 377, 117, 29);
+		frame.getContentPane().add(btnBookFlight);
 
 		JButton btnShowAllFlights = new JButton("Show all Flights");
 		btnShowAllFlights.addActionListener(new ActionListener() {
@@ -200,10 +200,10 @@ public class AdminSearchFlights {
 		lbBookFlight.setBounds(104, 382, 117, 16);
 		frame.getContentPane().add(lbBookFlight);
 		
-		txtFlightId = new JTextField();
-		txtFlightId.setBounds(235, 377, 177, 26);
-		frame.getContentPane().add(txtFlightId);
-		txtFlightId.setColumns(10);
+		txtBookFlight = new JTextField();
+		txtBookFlight.setBounds(235, 377, 177, 26);
+		frame.getContentPane().add(txtBookFlight);
+		txtBookFlight.setColumns(10);
 	}
 
 }

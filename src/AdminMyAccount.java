@@ -121,8 +121,8 @@ public class AdminMyAccount {
 		frame.getContentPane().add(txtRemoveFlight);
 		txtRemoveFlight.setColumns(10);
 		
-		JButton btnSearchAdminId = new JButton("Show Flights");
-		btnSearchAdminId.addActionListener(new ActionListener() {
+		JButton btnShowFlights = new JButton("Show Flights");
+		btnShowFlights.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 				
 					//show booked flights in table display 
@@ -137,8 +137,8 @@ public class AdminMyAccount {
 					
 			
 		});
-		btnSearchAdminId.setBounds(247, 62, 117, 29);
-		frame.getContentPane().add(btnSearchAdminId);
+		btnShowFlights.setBounds(247, 62, 117, 29);
+		frame.getContentPane().add(btnShowFlights);
 		
 		JButton btnRefresh = new JButton("Refresh");
 		btnRefresh.addActionListener(new ActionListener() {
