@@ -436,6 +436,201 @@ public class Queries {
 
 		return false;
 	}
+	
+	//Query to create new customer 
+	public static void newCustomer(ValueObject vo) {
+		Connection myConn = null;
+		PreparedStatement pst = null;
+		try {
+
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
+					"sql9232857", "JvbZyaTgLR");
+
+			Statement myStmt = myConn.createStatement();
+
+			// insert data into Customer table
+
+			String query = "insert into Customer (firstName, lastName, address, zip, state, username, password, email, recoveryQuestion, recoveryAnswer)"
+					+ "values (?,?,?,?,?,?,?,?,?,?)";
+
+			pst = myConn.prepareStatement(query);
+
+			// insert data into query where values is a question mark
+			pst.setString(1, vo.getFirstName());
+			pst.setString(2, vo.getLastName());
+			pst.setString(3, vo.getAddress());
+			pst.setString(4, vo.getZipcode());
+			pst.setString(5, vo.getState());
+			pst.setString(6, vo.getUsername());
+			pst.setString(7, vo.getPassword());
+			pst.setString(8, vo.getEmail());
+			pst.setString(9, vo.getQuestion());
+			pst.setString(10, vo.getAnswer());
+
+			// update
+			pst.executeUpdate();
+		}
+
+		catch (Exception exc) {
+			exc.printStackTrace();
+		} finally {
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					/* ignored */}
+				if (myConn != null) {
+					try {
+						myConn.close();
+					} catch (SQLException e) {
+						/* ignored */}
+
+				}
+			}
+		}
+
+	}
+	// retrieve password for customer
+
+	public static String fetchCustomerPassword(String username) {
+		Connection myConn = null;
+		PreparedStatement pst = null;
+		try {
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
+					"sql9232857", "JvbZyaTgLR");
+
+			// 2. Create the statement
+			Statement myStmt = myConn.createStatement();
+
+			String query = "select password from Customer where username = '" + username + "'";
+
+			pst = myConn.prepareStatement(query);
+
+			ResultSet rs = pst.executeQuery(query);
+
+			rs.next();
+			String password = rs.getString("password");
+
+			return password;
+		}
+
+		catch (Exception exc) {
+			exc.printStackTrace();
+		} finally {
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					/* ignored */}
+				if (myConn != null) {
+					try {
+						myConn.close();
+					} catch (SQLException e) {
+						/* ignored */}
+
+				}
+			}
+		}
+
+		return null;
+
+	}
+	
+	// query to find customer password
+
+	public static String forgotCustomerPassword(String username) {
+		Connection myConn = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		try {
+
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
+					"sql9232857", "JvbZyaTgLR");
+
+			Statement myStmt = myConn.createStatement();
+
+			// retrieve question from database for user
+
+			String query = "select recoveryQuestion from Customer where username = '" + username + "'";
+
+			pst = myConn.prepareStatement(query);
+
+			rs = pst.executeQuery(query);
+
+			// return result
+			rs.next();
+			String question = rs.getString("recoveryQuestion");
+
+			return question;
+		}
+
+		catch (Exception exc) {
+			exc.printStackTrace();
+		} finally {
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					/* ignored */}
+				if (myConn != null) {
+					try {
+						myConn.close();
+					} catch (SQLException e) {
+						/* ignored */}
+
+				}
+			}
+		}
+
+		return null;
+
+	}
+	
+	// query to find answer to security question for customer
+		public static String customerAnswer(String username) {
+			Connection myConn = null;
+			PreparedStatement pst = null;
+			ResultSet rs = null;
+			try {
+				myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
+						"sql9232857", "JvbZyaTgLR");
+
+				Statement myStmt = myConn.createStatement();
+
+				// select answer from Admins table given username
+				String query = "select recoveryAnswer from Customer where username = '" + username + "'";
+
+				pst = myConn.prepareStatement(query);
+
+				rs = pst.executeQuery(query);
+
+				// return result
+				rs.next();
+				String answer = rs.getString("recoveryAnswer");
+
+				return answer;
+			}
+
+			catch (Exception exc) {
+				exc.printStackTrace();
+			} finally {
+				if (pst != null) {
+					try {
+						pst.close();
+					} catch (SQLException e) {
+						/* ignored */}
+					if (myConn != null) {
+						try {
+							myConn.close();
+						} catch (SQLException e) {
+							/* ignored */}
+
+					}
+				}
+			}
+
+			return null;
+		}
 
 	// query to create new admin
 	public static void newAdmin(ValueObject vo) {

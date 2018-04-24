@@ -17,7 +17,8 @@ public class MainMenu {
 	JFrame frame;
 	JFormattedTextField txtAdminUsername;
 	JTextPane txtAdminPassword;
-
+	JFormattedTextField txtCustomerUsername;
+	JTextPane txtCustomerPassword;
 	/**
 	 * Launch the application.
 	 */
@@ -88,6 +89,8 @@ public class MainMenu {
 					VerifyInput ans1 = new VerifyInput();							
 					String adminUsername = txtAdminUsername.getText();
 					String checkPassword = txtAdminPassword.getText();
+					System.out.println(adminUsername);
+
 					String actualPassword = Queries.fetchAdminPassword(adminUsername);
 					ans1.setCheckPassword(checkPassword);
 					ans1.setPassword(actualPassword);
@@ -131,11 +134,54 @@ public class MainMenu {
 		btnAdminRegister.setBounds(62, 400, 117, 29);
 		frame.getContentPane().add(btnAdminRegister);
 
+		
 		JButton btnCustomerLogin = new JButton("Login");
 		btnCustomerLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			}
-		});
+				try {
+					
+					System.out.println("Login Button for customer pressed");
+					
+					//create verifyInput object to verify username and password
+			
+					VerifyInput ans1 = new VerifyInput();		
+					System.out.println("Login Button for customer pressed");
+
+					String customerUsername = txtCustomerUsername.getText();
+					System.out.println("Login Button for customer pressed");
+
+					String checkPassword = txtCustomerPassword.getText();
+					System.out.println(customerUsername);
+
+					String actualPassword = Queries.fetchCustomerPassword(customerUsername);
+
+					ans1.setCheckPassword(checkPassword);
+					ans1.setPassword(actualPassword);
+
+					if (ans1.Verification()) {									
+						System.out.println("Login Button for customer pressed");
+
+						//create object to hold Cusomter username as class variable
+						ValueObject vo1 = new ValueObject(customerUsername);		   
+						
+						//open admins main screen
+						CustomerScreen fr = new CustomerScreen();
+						fr.newScreen();											 
+						frame.dispose();
+						
+					//show wrong password pop up	
+					} else {
+						JOptionPane.showMessageDialog(null, "incorrect password", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+					//show miscelaneous login error	
+				} catch (Exception exc) {
+					exc.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Enter Credentials", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+
+		}
+	});
+	
 		btnCustomerLogin.setBounds(426, 330, 117, 29);
 		frame.getContentPane().add(btnCustomerLogin);
 
@@ -159,6 +205,14 @@ public class MainMenu {
 		txtAdminUsername = new JFormattedTextField();
 		txtAdminUsername.setBounds(62, 178, 117, 26);
 		frame.getContentPane().add(txtAdminUsername);
+		
+		txtCustomerPassword = new JTextPane();
+		txtCustomerPassword.setBounds(62, 270, 117, 16);
+		frame.getContentPane().add(txtCustomerPassword);
+
+		txtCustomerUsername = new JFormattedTextField();
+		txtCustomerUsername.setBounds(62, 178, 117, 26);
+		frame.getContentPane().add(txtCustomerUsername);
 
 		JFormattedTextField formattedTextField_1 = new JFormattedTextField();
 		formattedTextField_1.setBounds(426, 170, 117, 26);
@@ -167,6 +221,14 @@ public class MainMenu {
 		JFormattedTextField formattedTextField_2 = new JFormattedTextField();
 		formattedTextField_2.setBounds(426, 270, 117, 26);
 		frame.getContentPane().add(formattedTextField_2);
+	
+//		JFormattedTextField formattedTextField_3 = new JFormattedTextField();
+//		formattedTextField_3.setBounds(426, 170, 117, 26);
+//		frame.getContentPane().add(formattedTextField_3);
+//
+//		JFormattedTextField formattedTextField_4 = new JFormattedTextField();
+//		formattedTextField_4.setBounds(426, 270, 117, 26);
+//		frame.getContentPane().add(formattedTextField_4);
 
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);

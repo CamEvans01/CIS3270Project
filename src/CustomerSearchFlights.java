@@ -93,6 +93,9 @@ public class CustomerSearchFlights {
 		JButton btnAddFlight = new JButton("Book Flight");
 		btnAddFlight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				System.out.println("Book Flight Button Pressed");
+				
 			}
 		});
 		btnAddFlight.setBounds(416, 360, 117, 29);

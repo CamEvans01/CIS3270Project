@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.JButton;
@@ -57,12 +58,41 @@ public class CustomerMyAccount {
 		lblBookedFlights.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBookedFlights.setBounds(247, 105, 110, 16);
 		frame.getContentPane().add(lblBookedFlights);
+	
+		
+	// For removing a flight for a customer 
 		
 		JButton btnRemove_Flight = new JButton("Remove Flight");
 		btnRemove_Flight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("Remove Flight Button Pressed");
+				
+				
+				//get flight id from textfield and cast to int value
+				String stringidFlight = txtRemoveFlight.getText();
+				int idFlight = Integer.parseInt(stringidFlight);
+				
+				//if the flight is booked...
+				if (Queries.checkMyFlightId(idFlight)) {
+					
+				//run query to remove flight based on its id
+				try {
+				Queries.removeMyFlight(idFlight);
+				
+				//show confirmation message
+				JOptionPane.showMessageDialog(null, "flight removed", "Success", JOptionPane.INFORMATION_MESSAGE);
+				
+				}catch(Exception exc) {
+					exc.printStackTrace();
+				}
+			}else {
+				//show failure message
+				JOptionPane.showMessageDialog(null, "Invalid Flight", "Failure", JOptionPane.ERROR_MESSAGE);
+			}
+				txtRemoveFlight.setText("");
 			}
 		});
+		
 		btnRemove_Flight.setBounds(334, 375, 117, 29);
 		frame.getContentPane().add(btnRemove_Flight);
 		
@@ -84,6 +114,9 @@ public class CustomerMyAccount {
 		JButton btnShowFlights = new JButton("Show FLights");
 		btnShowFlights.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				System.out.println("Show Flights Button Pressed");
+				
 			}
 		});
 		btnShowFlights.setBounds(247, 61, 117, 29);

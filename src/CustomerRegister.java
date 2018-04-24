@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -150,7 +151,48 @@ public class CustomerRegister extends JFrame {
 		txtAnswer.setColumns(10);
 		
 		JButton btnCreateAccount = new JButton("Create Account");
-		btnCreateAccount.setBounds(268, 468, 130, 29);
+		btnCreateAccount.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				
+				System.out.println("Create Account Button Pressed");
+				
+				// create valueObject object to hold values entered from text fields
+				ValueObject vo = new ValueObject();
+				vo.firstName = txtFirst_Name.getText();
+				vo.lastName = txtLast_Name.getText();
+				vo.address = txtAddress.getText();
+				vo.zipcode = txtZipcode.getText();
+				vo.state = txtState.getText();
+				vo.username = txtUsername.getText();
+				vo.password = txtPassword.getText();
+				vo.email = txtEmail.getText();
+				vo.question = txtQuestion.getText();
+				vo.answer = txtAnswer.getText();
+
+				// send object to query to create new object
+				try {
+					Queries.newCustomer(vo);
+				} catch (Exception exc) {
+					exc.printStackTrace();
+				}
+				txtFirst_Name.setText(" ");
+				txtLast_Name.setText(" ");
+				txtAddress.setText(" ");
+				txtZipcode.setText(" ");
+				txtState.setText(" ");
+				txtUsername.setText(" ");
+				txtPassword.setText(" ");
+				txtEmail.setText(" ");
+				txtQuestion.setText(" ");
+				txtAnswer.setText(" ");
+				JOptionPane.showMessageDialog(null, "Customer Created", "Update", JOptionPane.INFORMATION_MESSAGE);
+
+			}
+
+		});
+		
+		btnCreateAccount.setBounds(271, 493, 130, 29);
 		frame.getContentPane().add(btnCreateAccount);
 		
 		JButton btnMainMenu = new JButton("Main Menu");

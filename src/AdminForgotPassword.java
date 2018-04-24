@@ -79,7 +79,7 @@ public class AdminForgotPassword extends JFrame{
 				
 				//set textfield to display security question based with the user's username as parameter
 				txtQuestion.setText(Queries.forgotAdminPassword(username));
-				
+
 				//find answer and password from query using user's username as parameter
 				String answer = Queries.adminAnswer(username);
 				String password = Queries.fetchAdminPassword(username);
@@ -117,10 +117,12 @@ public class AdminForgotPassword extends JFrame{
 				
 				//get answer from text field
 				String myAnswer = txtAnswer.getText();
-				
+				System.out.println(myAnswer);
+
 				//send entered answer from textfield to object for verification
 				ans1.setMyAnswer(myAnswer);
-				
+				System.out.println(ans1);
+
 				//if the answer is correct...
 				if(ans1.isCorrect()) {
 				

@@ -39,8 +39,9 @@ public class VerifyInput {
 		if(getMyAnswer().equalsIgnoreCase(getAnswer())){
 			
 			return true;
-		}
+		} 
 		return false;
+		
 	}
 	
 	//verify if given password equals stored password
