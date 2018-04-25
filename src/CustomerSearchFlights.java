@@ -4,6 +4,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import net.proteanit.sql.DbUtils;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import java.awt.Color;
 import javax.swing.DefaultListModel;
@@ -22,6 +23,8 @@ import java.sql.*;
 public class CustomerSearchFlights {
 
 	private JFrame frame;
+	private JTextField txtSearchCity;
+
 	
 
 	/**
@@ -98,6 +101,39 @@ public class CustomerSearchFlights {
 				
 				System.out.println("Book Flight Button Pressed");
 				
+				//get flights id from text field and parse to int value
+				String stringidFlight = txtBookFlight.getText();
+				int idFlight = Integer.parseInt(stringidFlight);
+				
+				//send flight id to queries to gather information
+				String departureCity = Queries.fetchDepartureCity(idFlight);
+				String departureDate = Queries.fetchDepartureDate(idFlight);
+				String departureTime = Queries.fetchArrivalTime(idFlight);
+				String arrivalCity = Queries.fetchArrivalCity(idFlight);
+				String arrivalDate = Queries.fetchArrivalDate(idFlight);
+				String arrivalTime = Queries.fetchDepartureTime(idFlight);
+				
+				//check if the flight exists
+				if (Queries.checkFlightId(idFlight)) {
+				
+					//insert data into bookflight table
+					try {
+					Queries.bookFlight(idFlight, ValueObject.bookingUsername, departureCity, departureDate, departureTime, 
+							arrivalCity,arrivalDate, arrivalTime);
+					
+					//pop up message to confirm booked flight
+					JOptionPane.showMessageDialog(null, "flight booked", "update", JOptionPane.INFORMATION_MESSAGE);
+				
+					} catch (Exception exc) {
+					exc.printStackTrace();
+				}
+					
+			}else {
+				//pop up message to show flight doesn't exist
+				JOptionPane.showMessageDialog(null, "Invalid Flight", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+				
+				
 			}
 		});
 		btnBookFlight.setBounds(416, 360, 117, 29);
@@ -125,15 +161,17 @@ public class CustomerSearchFlights {
 		table.setBounds(6, 34, 588, 154);
 		frame.getContentPane().add(table);
 		
+		//text field for user to type in departure city
+
+		txtSearchCity = new JTextField();
+		txtSearchCity.setBounds(235, 281, 177, 26);
+		frame.getContentPane().add(txtSearchCity);
+		txtSearchCity.setColumns(10);
+
 		JLabel lblSearch = new JLabel("Search");
 		lblSearch.setBounds(261, 247, 61, 16);
 		frame.getContentPane().add(lblSearch);
-		
-		//text field for user to type in departure city
-		txtDepartureCity = new JTextField();
-		txtDepartureCity.setBounds(205, 279, 182, 26);
-		frame.getContentPane().add(txtDepartureCity);
-		txtDepartureCity.setColumns(10);
+	
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setForeground(Color.BLACK);
@@ -146,7 +184,24 @@ public class CustomerSearchFlights {
 			
 			//button to show all flights in Flight table
 			public void actionPerformed(ActionEvent e) {
-			
+				//get city name from text field
+				String city = txtSearchCity.getText();
+				
+				//if the city exists...
+				if (Queries.checkFlight(city)) {
+					try {
+						//display searched-for city in table display
+						table.setModel(DbUtils.resultSetToTableModel(Queries.searchByDepartureCity(city)));
+
+					} catch (Exception exc) {
+						exc.printStackTrace();
+
+					}
+				} else {
+					//show message that city doesn't exist
+					JOptionPane.showMessageDialog(null, "Invalid City", "Error", JOptionPane.ERROR_MESSAGE);
+
+				}
 			}
 		});
 		btnSearchCity.setBounds(416, 279, 117, 29);

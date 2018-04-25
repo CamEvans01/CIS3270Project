@@ -195,7 +195,6 @@ public class AdminManageFlights {
 		JButton btnRefresh = new JButton("Refresh");
 		btnRefresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				//refresh screen and show flights
 				try {
 

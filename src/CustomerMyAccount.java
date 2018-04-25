@@ -3,6 +3,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import net.proteanit.sql.DbUtils;
+
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -67,12 +70,14 @@ public class CustomerMyAccount {
 			
 			//button to remove this customer's flight from Bookings table
 			public void actionPerformed(ActionEvent e) {
+				
 				System.out.println("Remove Flight Button Pressed");
 				
 				
 				//get flight id from textfield and cast to int value
 				String stringidFlight = txtRemoveFlight.getText();
 				int idFlight = Integer.parseInt(stringidFlight);
+				System.out.println(idFlight);
 				
 				//if the flight is booked...
 				if (Queries.checkMyFlightId(idFlight)) {
@@ -121,8 +126,18 @@ public class CustomerMyAccount {
 				
 				System.out.println("Show Flights Button Pressed");
 				
+				//show booked flights in table display 
+				try {
+
+					table.setModel(DbUtils.resultSetToTableModel(Queries.showMyFlights()));
+
+				} catch (Exception exc) {
+					exc.printStackTrace();
+				}
 			}
-		});
+				
+		
+	});
 		btnShowFlights.setBounds(247, 61, 117, 29);
 		frame.getContentPane().add(btnShowFlights);
 		
