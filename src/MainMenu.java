@@ -12,14 +12,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
+
 //startup screen
 public class MainMenu {
-	
+
 	JFrame frame;
 	JFormattedTextField txtAdminUsername;
 	JTextPane txtAdminPassword;
 	private JTextField txtCustomerUsername;
 	private JTextField txtCustomerPassword;
+
 	/**
 	 * Launch the application.
 	 */
@@ -32,11 +34,11 @@ public class MainMenu {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
+
 			}
 		});
 	}
-	
+
 	/**
 	 * Create the application.
 	 */
@@ -84,36 +86,36 @@ public class MainMenu {
 		JButton btnAdminLogin = new JButton("Login");
 		btnAdminLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				try {
-					//create verifyInput object to verify username and password
-					VerifyInput ans1 = new VerifyInput();							
+					// create verifyInput object to verify username and password
+					VerifyInput ans1 = new VerifyInput();
 					String adminUsername = txtAdminUsername.getText();
 					String checkPassword = txtAdminPassword.getText();
-					//System.out.println(adminUsername);
+					// System.out.println(adminUsername);
 
 					String actualPassword = Queries.fetchAdminPassword(adminUsername);
 					ans1.setCheckPassword(checkPassword);
 					ans1.setPassword(actualPassword);
 
-					if (ans1.Verification()) {									
-						 
-						//create object to hold admins username as class variable
-						ValueObject vo1 = new ValueObject(adminUsername);		   
-						
-						//open admins main screen
+					if (ans1.Verification()) {
+
+						// create object to hold admins username as class variable
+						ValueObject vo1 = new ValueObject(adminUsername);
+
+						// open admins main screen
 						AdminScreen fr = new AdminScreen();
-						fr.newScreen();											 
+						fr.newScreen();
 						frame.dispose();
-						
-					//show wrong password pop up	
+
+						// show wrong password pop up
 					} else {
 						JOptionPane.showMessageDialog(null, "incorrect password", "Error", JOptionPane.ERROR_MESSAGE);
 					}
-					//show miscelaneous login error	
+					// show miscelaneous login error
 				} catch (Exception exc) {
 					exc.printStackTrace();
-					JOptionPane.showMessageDialog(null, "Enter Credentials", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Username and Password Not Found", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 
 			}
@@ -124,8 +126,8 @@ public class MainMenu {
 		JButton btnAdminRegister = new JButton("Register");
 		btnAdminRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				//launch register admin screen
+
+				// launch register admin screen
 				AdminRegister fr = new AdminRegister();
 				fr.newScreen();
 				frame.dispose();
@@ -135,17 +137,16 @@ public class MainMenu {
 		btnAdminRegister.setBounds(62, 400, 117, 29);
 		frame.getContentPane().add(btnAdminRegister);
 
-		
 		JButton btnCustomerLogin = new JButton("Login");
 		btnCustomerLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					
+
 					System.out.println("Login Button for customer pressed");
-					
-					//create verifyInput object to verify username and password
-			
-					VerifyInput ans1 = new VerifyInput();		
+
+					// create verifyInput object to verify username and password
+
+					VerifyInput ans1 = new VerifyInput();
 					System.out.println("Login Button for customer pressed");
 
 					String customerUsername = txtCustomerUsername.getText();
@@ -159,38 +160,38 @@ public class MainMenu {
 					ans1.setCheckPassword(checkPassword);
 					ans1.setPassword(actualPassword);
 
-					if (ans1.Verification()) {									
+					if (ans1.Verification()) {
 						System.out.println("Login Button for customer pressed");
 
-						//create object to hold Cusomter username as class variable
-						ValueObject vo1 = new ValueObject(customerUsername);		   
-						
-						//open admins main screen
+						// create object to hold Cusomter username as class variable
+						ValueObject vo1 = new ValueObject(customerUsername);
+
+						// open admins main screen
 						CustomerScreen fr = new CustomerScreen();
-						fr.newScreen();											 
+						fr.newScreen();
 						frame.dispose();
-						
-					//show wrong password pop up	
+
+						// show wrong password pop up
 					} else {
 						JOptionPane.showMessageDialog(null, "incorrect password", "Error", JOptionPane.ERROR_MESSAGE);
 					}
-					//show miscelaneous login error	
+					// show miscelaneous login error
 				} catch (Exception exc) {
 					exc.printStackTrace();
-					JOptionPane.showMessageDialog(null, "Enter Credentials", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Username and Password Not Found", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 
-		}
-	});
-	
+			}
+		});
+
 		btnCustomerLogin.setBounds(426, 330, 117, 29);
 		frame.getContentPane().add(btnCustomerLogin);
 
 		JButton btnCustomerRegister = new JButton("Register");
 		btnCustomerRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				//launch customer register screen
+
+				// launch customer register screen
 				CustomerRegister fr = new CustomerRegister();
 				fr.newScreen();
 				frame.dispose();
@@ -206,8 +207,7 @@ public class MainMenu {
 		txtAdminUsername = new JFormattedTextField();
 		txtAdminUsername.setBounds(62, 178, 117, 26);
 		frame.getContentPane().add(txtAdminUsername);
-		
-		
+
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
 		separator.setBackground(Color.BLACK);
@@ -218,8 +218,8 @@ public class MainMenu {
 		JButton btnForgot_Password_Admin = new JButton("Forgot Password");
 		btnForgot_Password_Admin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				//launch admin forgot password screen
+
+				// launch admin forgot password screen
 				AdminForgotPassword fr = new AdminForgotPassword();
 				fr.newScreen();
 				frame.dispose();
@@ -231,8 +231,8 @@ public class MainMenu {
 		JButton btnForgotPassword_Customer = new JButton("Forgot Password");
 		btnForgotPassword_Customer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				//launch customer forgot password screen
+
+				// launch customer forgot password screen
 				CustomerForgotPassword fr = new CustomerForgotPassword();
 				fr.newScreen();
 				frame.dispose();
@@ -240,17 +240,16 @@ public class MainMenu {
 		});
 		btnForgotPassword_Customer.setBounds(418, 461, 135, 29);
 		frame.getContentPane().add(btnForgotPassword_Customer);
-		
+
 		txtCustomerUsername = new JTextField();
 		txtCustomerUsername.setBounds(418, 170, 130, 26);
 		frame.getContentPane().add(txtCustomerUsername);
 		txtCustomerUsername.setColumns(10);
-		
+
 		txtCustomerPassword = new JTextField();
 		txtCustomerPassword.setBounds(418, 260, 130, 26);
 		frame.getContentPane().add(txtCustomerPassword);
 		txtCustomerPassword.setColumns(10);
 
 	}
-	}
-
+}

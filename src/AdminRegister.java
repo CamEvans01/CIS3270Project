@@ -161,36 +161,78 @@ public class AdminRegister extends JFrame {
 
 				// create valueObject object to hold values entered from text fields
 				ValueObject vo = new ValueObject();
-				vo.firstName = txtFirst_Name.getText();
-				vo.lastName = txtLast_Name.getText();
-				vo.address = txtAddress.getText();
-				vo.zipcode = txtZipcode.getText();
-				vo.state = txtState.getText();
-				vo.username = txtUsername.getText();
-				vo.password = txtPassword.getText();
-				vo.email = txtEmail.getText();
-				vo.ssn = txtSsn.getText();
-				vo.question = txtQuestion.getText();
-				vo.answer = txtAnswer.getText();
+				vo.setFirstName(txtFirst_Name.getText());
+				vo.setLastName(txtLast_Name.getText());
+				vo.setAddress(txtAddress.getText());
+				vo.setZipcode(txtZipcode.getText());
+				vo.setState(txtState.getText());
+				vo.setUsername(txtUsername.getText());
+				vo.setPassword(txtPassword.getText());
+				vo.setEmail(txtEmail.getText());
+				vo.setSsn(txtSsn.getText());
+				vo.setSecurityQuestion(txtQuestion.getText());
+				vo.setAnswer(txtAnswer.getText());
 
-				// send object to query to create new object
-				try {
-					Queries.newAdmin(vo);
-				} catch (Exception exc) {
-					exc.printStackTrace();
+				//verifying inputs in verifyInput class
+				VerifyInput v1 = new VerifyInput();
+				if (v1.firstNameAllLetters(vo) == false || v1.lastNameAllLetters(vo) == false) {
+					JOptionPane.showMessageDialog(null, "Enter a valid first and last name", "Error", JOptionPane.ERROR_MESSAGE);
+				
+				}else if(txtAddress.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Enter value for address", "Error", JOptionPane.ERROR_MESSAGE);
+					
+				}else if(v1.zipcodeVerify(vo) == false){
+					JOptionPane.showMessageDialog(null, "zipcode must be 5 digits long", "Error", JOptionPane.ERROR_MESSAGE);
+				
+				}else if(v1.stateAllLetters(vo) == false){
+					JOptionPane.showMessageDialog(null, "State must contain letters only", "Error", JOptionPane.ERROR_MESSAGE);
+				
+				}else if(Queries.checkAdminUsernameExists(vo.getUsername())) {
+					JOptionPane.showMessageDialog(null, "Username already exists", "Error", JOptionPane.ERROR_MESSAGE);
+					
+				}else if (txtPassword.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Enter value for password", "Error", JOptionPane.ERROR_MESSAGE);
+				
+				}else if(v1.emailVerify(vo) == false) {
+					JOptionPane.showMessageDialog(null, "Enter a valid email address: x@x.com", "Error", JOptionPane.ERROR_MESSAGE);
+					
+				}else if(Queries.checkAdminEmailExists(vo.getEmail())) {
+					JOptionPane.showMessageDialog(null, "Email already exists", "Error", JOptionPane.ERROR_MESSAGE);
+				
+				}else if(v1.ssnVerify(vo) == false){
+					JOptionPane.showMessageDialog(null, "SSN must be 9 digits long", "Error", JOptionPane.ERROR_MESSAGE);
+					
+				}else if(Queries.checkAdminSSNExists(vo.getSsn())) {
+					JOptionPane.showMessageDialog(null, "SSN already exists", "Error", JOptionPane.ERROR_MESSAGE);
+				
+				}else if (txtQuestion.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Enter a security question", "Error", JOptionPane.ERROR_MESSAGE);
+						
+				}else if (txtAnswer.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Enter an answer", "Error", JOptionPane.ERROR_MESSAGE);
+				
+				}else {
+
+					// send object to query to create new object
+					try {
+						Queries.newAdmin(vo);
+					} catch (Exception exc) {
+						exc.printStackTrace();
+					}
+					//making text blank
+					txtFirst_Name.setText("");
+					txtLast_Name.setText("");
+					txtAddress.setText("");
+					txtZipcode.setText("");
+					txtState.setText("");
+					txtUsername.setText("");
+					txtPassword.setText("");
+					txtEmail.setText("");
+					txtSsn.setText("");
+					txtQuestion.setText("");
+					txtAnswer.setText("");
+					JOptionPane.showMessageDialog(null, "Admin Created", "Update", JOptionPane.INFORMATION_MESSAGE);
 				}
-				txtFirst_Name.setText(" ");
-				txtLast_Name.setText(" ");
-				txtAddress.setText(" ");
-				txtZipcode.setText(" ");
-				txtState.setText(" ");
-				txtUsername.setText(" ");
-				txtPassword.setText(" ");
-				txtEmail.setText(" ");
-				txtSsn.setText(" ");
-				txtQuestion.setText(" ");
-				txtAnswer.setText(" ");
-				JOptionPane.showMessageDialog(null, "Admin Created", "Update", JOptionPane.INFORMATION_MESSAGE);
 
 			}
 
@@ -200,24 +242,16 @@ public class AdminRegister extends JFrame {
 
 		JButton btnMainMenu = new JButton("Main Menu");
 		btnMainMenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				//return to main menu
-				ReturnToMain m1 = new ReturnToMain();
-				m1.returnHome();
-				frame.dispose();
-			}
-		});
-		btnMainMenu.setBounds(0, 1, 117, 29);
-		frame.getContentPane().add(btnMainMenu);
 
-		JLabel lblSsn = new JLabel("SSN");
-		lblSsn.setBounds(37, 376, 61, 16);
-		frame.getContentPane().add(lblSsn);
+	public void actionPerformed(ActionEvent e) {
 
-		txtSsn = new JTextField();
-		txtSsn.setBounds(180, 371, 370, 26);
-		frame.getContentPane().add(txtSsn);
-		txtSsn.setColumns(10);
-	}
-}
+		// return to main menu
+		ReturnToMain m1 = new ReturnToMain();
+		m1.returnHome();
+		frame.dispose();
+	}});btnMainMenu.setBounds(0,1,117,29);frame.getContentPane().add(btnMainMenu);
+
+	JLabel lblSsn = new JLabel("SSN");lblSsn.setBounds(37,376,61,16);frame.getContentPane().add(lblSsn);
+
+	txtSsn=new JTextField();txtSsn.setBounds(180,371,370,26);frame.getContentPane().add(txtSsn);txtSsn.setColumns(10);
+}}

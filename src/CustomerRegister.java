@@ -22,6 +22,7 @@ public class CustomerRegister extends JFrame {
 	private JTextField txtEmail;
 	private JTextField txtQuestion;
 	private JTextField txtAnswer;
+	private JTextField txtSsn;
 
 	/**
 	 * Launch the application.
@@ -93,11 +94,11 @@ public class CustomerRegister extends JFrame {
 		frame.getContentPane().add(lblNewLabel_7);
 		
 		JLabel lblNewLabel_8 = new JLabel("Security Question");
-		lblNewLabel_8.setBounds(37, 379, 120, 16);
+		lblNewLabel_8.setBounds(37, 406, 120, 16);
 		frame.getContentPane().add(lblNewLabel_8);
 		
 		JLabel lblNewLabel_9 = new JLabel("Security Answer");
-		lblNewLabel_9.setBounds(37, 417, 120, 16);
+		lblNewLabel_9.setBounds(37, 444, 120, 16);
 		frame.getContentPane().add(lblNewLabel_9);
 		
 		txtFirst_Name = new JTextField();
@@ -141,12 +142,12 @@ public class CustomerRegister extends JFrame {
 		txtEmail.setColumns(10);
 		
 		txtQuestion = new JTextField();
-		txtQuestion.setBounds(180, 379, 370, 26);
+		txtQuestion.setBounds(180, 401, 370, 26);
 		frame.getContentPane().add(txtQuestion);
 		txtQuestion.setColumns(10);
 		
 		txtAnswer = new JTextField();
-		txtAnswer.setBounds(180, 417, 370, 26);
+		txtAnswer.setBounds(180, 439, 370, 26);
 		frame.getContentPane().add(txtAnswer);
 		txtAnswer.setColumns(10);
 		
@@ -159,16 +160,59 @@ public class CustomerRegister extends JFrame {
 				
 				// create valueObject object to hold values entered from text fields
 				ValueObject vo = new ValueObject();
-				vo.firstName = txtFirst_Name.getText();
-				vo.lastName = txtLast_Name.getText();
-				vo.address = txtAddress.getText();
-				vo.zipcode = txtZipcode.getText();
-				vo.state = txtState.getText();
-				vo.username = txtUsername.getText();
-				vo.password = txtPassword.getText();
-				vo.email = txtEmail.getText();
-				vo.question = txtQuestion.getText();
-				vo.answer = txtAnswer.getText();
+				vo.setFirstName(txtFirst_Name.getText());
+				vo.setLastName(txtLast_Name.getText());
+				vo.setAddress(txtAddress.getText());
+				vo.setZipcode(txtZipcode.getText());
+				vo.setState(txtState.getText());
+				vo.setUsername(txtUsername.getText());
+				vo.setPassword(txtPassword.getText());
+				vo.setEmail(txtEmail.getText());
+				vo.setSsn(txtSsn.getText());
+				vo.setSecurityQuestion(txtQuestion.getText());
+				vo.setAnswer(txtAnswer.getText());
+				
+				VerifyInput v1 = new VerifyInput();
+				if (v1.firstNameAllLetters(vo) == false || v1.lastNameAllLetters(vo) == false) {
+					JOptionPane.showMessageDialog(null, "Enter a valid first and last name", "Error", JOptionPane.ERROR_MESSAGE);
+				
+				}else if(txtAddress.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Enter value for address", "Error", JOptionPane.ERROR_MESSAGE);
+					
+				}else if(v1.zipcodeVerify(vo) == false){
+					JOptionPane.showMessageDialog(null, "zipcode must be 5 digits long", "Error", JOptionPane.ERROR_MESSAGE);
+				
+				}else if(v1.stateAllLetters(vo) == false){
+					JOptionPane.showMessageDialog(null, "State must contain letters only", "Error", JOptionPane.ERROR_MESSAGE);
+				
+				}else if(txtUsername.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Enter value for username", "Error", JOptionPane.ERROR_MESSAGE);
+						
+				}else if(Queries.checkCustomerUsernameExists(vo.getUsername())) {
+					JOptionPane.showMessageDialog(null, "Username already exists", "Error", JOptionPane.ERROR_MESSAGE);
+					
+				}else if (txtPassword.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Enter value for password", "Error", JOptionPane.ERROR_MESSAGE);
+				
+				}else if(v1.emailVerify(vo) == false) {
+					JOptionPane.showMessageDialog(null, "Enter a valid email address: x@x.com", "Error", JOptionPane.ERROR_MESSAGE);
+					
+				}else if(Queries.checkCustomerEmailExists(vo.getEmail())) {
+					//JOptionPane.showMessageDialog(null, "Email already exists", "Error", JOptionPane.ERROR_MESSAGE);
+				
+				}else if(v1.ssnVerify(vo) == false){
+					JOptionPane.showMessageDialog(null, "SSN must be 9 digits long", "Error", JOptionPane.ERROR_MESSAGE);
+					
+				}else if(Queries.checkCustomerSSNExists(vo.getSsn())) {
+					//JOptionPane.showMessageDialog(null, "SSN already exists", "Error", JOptionPane.ERROR_MESSAGE);
+				
+				}else if (txtQuestion.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Enter a security question", "Error", JOptionPane.ERROR_MESSAGE);
+						
+				}else if (txtAnswer.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Enter an answer", "Error", JOptionPane.ERROR_MESSAGE);
+				
+				}else {
 
 				// send object to query to create new object
 				try {
@@ -176,18 +220,19 @@ public class CustomerRegister extends JFrame {
 				} catch (Exception exc) {
 					exc.printStackTrace();
 				}
-				txtFirst_Name.setText(" ");
-				txtLast_Name.setText(" ");
-				txtAddress.setText(" ");
-				txtZipcode.setText(" ");
-				txtState.setText(" ");
-				txtUsername.setText(" ");
-				txtPassword.setText(" ");
-				txtEmail.setText(" ");
-				txtQuestion.setText(" ");
-				txtAnswer.setText(" ");
+				txtFirst_Name.setText("");
+				txtLast_Name.setText("");
+				txtAddress.setText("");
+				txtZipcode.setText("");
+				txtState.setText("");
+				txtUsername.setText("");
+				txtPassword.setText("");
+				txtEmail.setText("");
+				txtSsn.setText("");
+				txtQuestion.setText("");
+				txtAnswer.setText("");
 				JOptionPane.showMessageDialog(null, "Customer Created", "Update", JOptionPane.INFORMATION_MESSAGE);
-
+				}
 			}
 
 		});
@@ -205,5 +250,14 @@ public class CustomerRegister extends JFrame {
 		});
 		btnMainMenu.setBounds(0, 1, 117, 29);
 		frame.getContentPane().add(btnMainMenu);
+		
+		JLabel lblSsn = new JLabel("SSN");
+		lblSsn.setBounds(37, 378, 61, 16);
+		frame.getContentPane().add(lblSsn);
+		
+		txtSsn = new JTextField();
+		txtSsn.setBounds(180, 373, 370, 26);
+		frame.getContentPane().add(txtSsn);
+		txtSsn.setColumns(10);
 	}
 }

@@ -1,5 +1,3 @@
-
-
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -77,14 +75,25 @@ public class AdminForgotPassword extends JFrame{
 				//get username from textfield
 				String username = txtUsername.getText();
 				
-				//set textfield to display security question based with the user's username as parameter
+				//set textfield to display security question based on the user's username as parameter
+				try {
+				if(Queries.checkAdminUsernameExists(username) == false){
+					JOptionPane.showMessageDialog(null, "Username doesn't exist", "Error", JOptionPane.ERROR_MESSAGE);
+				
+				}else {
 				txtQuestion.setText(Queries.forgotAdminPassword(username));
+				}
+				
+				}catch(Exception exc) {
+					exc.printStackTrace();
+				}
+				
 
 				//find answer and password from query using user's username as parameter
 				String answer = Queries.adminAnswer(username);
 				String password = Queries.fetchAdminPassword(username);
 				
-				//set the answer and password to verifyInput object to be used later
+				//set the answer and password in verifyInput object to be used later
 				ans1.setAnswer(answer);
 				ans1.setPassword(password);
 				

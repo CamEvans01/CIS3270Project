@@ -450,8 +450,8 @@ public class Queries {
 
 			// insert data into Customer table
 
-			String query = "insert into Customer (firstName, lastName, address, zip, state, username, password, email, recoveryQuestion, recoveryAnswer)"
-					+ "values (?,?,?,?,?,?,?,?,?,?)";
+			String query = "insert into Customer (firstName, lastName, address, zip, state, username, password, email, ssn, recoveryQuestion, recoveryAnswer)"
+					+ "values (?,?,?,?,?,?,?,?,?,?,?)";
 
 			pst = myConn.prepareStatement(query);
 
@@ -464,8 +464,9 @@ public class Queries {
 			pst.setString(6, vo.getUsername());
 			pst.setString(7, vo.getPassword());
 			pst.setString(8, vo.getEmail());
-			pst.setString(9, vo.getQuestion());
-			pst.setString(10, vo.getAnswer());
+			pst.setString(9, vo.getSsn());
+			pst.setString(10, vo.getQuestion());
+			pst.setString(11, vo.getAnswer());
 
 			// update
 			pst.executeUpdate();
@@ -699,7 +700,7 @@ public class Queries {
 
 			Statement myStmt = myConn.createStatement();
 
-			// retriece question from database for user
+			// retrieve question from database for user
 
 			String query = "select question from Admins where username = '" + username + "'";
 
@@ -1117,4 +1118,322 @@ public class Queries {
 		return null;
 
 	}
+	
+	public static boolean checkAdminUsernameExists(String username) {
+		Connection myConn = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		try {
+
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
+					"sql9232857", "JvbZyaTgLR");
+
+			Statement myStmt = myConn.createStatement();
+
+			
+			String query = "select * from Admins where username = '" + username + "'";
+
+			pst = myConn.prepareStatement(query);
+
+			rs = pst.executeQuery();
+
+			// return result
+			
+			String usernameCount;
+			if(rs.next()) {
+				usernameCount = rs.getString("username");
+				if (usernameCount.equalsIgnoreCase(username)){
+					return true;
+				}
+			}
+			
+			return false;
+		}
+
+		catch (Exception exc) {
+			exc.printStackTrace();
+		}finally {
+			if (myConn != null) {
+				try {
+					myConn.close();
+				} catch (SQLException e) {
+					/* ignored */}
+			}
+		}
+			return false;
+
+	}
+	//check if admin email is in database
+	public static boolean checkAdminEmailExists(String email) {
+		Connection myConn = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		try {
+
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
+					"sql9232857", "JvbZyaTgLR");
+
+			Statement myStmt = myConn.createStatement();
+
+	
+			String query = "select * from Admins where email = '" + email + "'";
+
+			pst = myConn.prepareStatement(query);
+
+			rs = pst.executeQuery();
+
+			// return result
+			
+			String usernameCount;
+			if(rs.next()) {
+				usernameCount = rs.getString("email");
+				if (usernameCount.equalsIgnoreCase(email)){
+					return true;
+				}
+			}
+			
+			return false;
+		}
+
+		catch (Exception exc) {
+			exc.printStackTrace();
+		}finally {
+			if (myConn != null) {
+				try {
+					myConn.close();
+				} catch (SQLException e) {
+					/* ignored */}
+			}
+		}
+			return false;
+
+	}
+	
+	public static boolean checkAdminSSNExists(String ssn) {
+		Connection myConn = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		try {
+
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
+					"sql9232857", "JvbZyaTgLR");
+
+			Statement myStmt = myConn.createStatement();
+
+			// select all flights with matching city name
+			String query = "select * from Admins where ssn = '" + ssn + "'";
+
+			pst = myConn.prepareStatement(query);
+
+			rs = pst.executeQuery();
+
+			// return result
+			
+			String usernameCount;
+			if(rs.next()) {
+				usernameCount = rs.getString("ssn");
+				if (usernameCount.equalsIgnoreCase(ssn)){
+					return true;
+				}
+			}
+			
+			return false;
+		}
+
+		catch (Exception exc) {
+			exc.printStackTrace();
+		}finally {
+			if (myConn != null) {
+				try {
+					myConn.close();
+				} catch (SQLException e) {
+					/* ignored */}
+			}
+		}
+			return false;
+
+	}
+	
+	public static boolean checkCustomerUsernameExists(String username) {
+		Connection myConn = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		try {
+
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
+					"sql9232857", "JvbZyaTgLR");
+
+			Statement myStmt = myConn.createStatement();
+
+			// select all flights with matching city name
+			String query = "select * from Customer where username = '" + username + "'";
+
+			pst = myConn.prepareStatement(query);
+
+			rs = pst.executeQuery();
+
+			// return result
+			
+			String usernameCount;
+			if(rs.next()) {
+				usernameCount = rs.getString("username");
+				if (usernameCount.equalsIgnoreCase(username)){
+					return true;
+				}
+			}
+			
+			return false;
+		}
+
+		catch (Exception exc) {
+			exc.printStackTrace();
+		}finally {
+			if (myConn != null) {
+				try {
+					myConn.close();
+				} catch (SQLException e) {
+					/* ignored */}
+			}
+		}
+			return false;
+
+	}
+	//query to check if flight is already booked
+	public static boolean checkFlightAlreadyBooked(String username, int flightBooked) {
+		Connection myConn = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		try {
+
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
+					"sql9232857", "JvbZyaTgLR");
+
+			Statement myStmt = myConn.createStatement();
+
+			// count flights with same id in booking
+			String query = "select count(idFlights) from Bookings where username = '" + username + "'" + "and idFlights = '" + flightBooked + "'";
+
+			pst = myConn.prepareStatement(query);
+
+			rs = pst.executeQuery();
+
+			// return result
+			
+			int flightCount = 0;
+			if(rs.next()) {
+				flightCount = rs.getInt("Count(idFlights)");
+				if(flightCount > 0) {
+					return true;
+				}
+			}
+			
+			
+			
+			return false;
+		}
+
+		catch (Exception exc) {
+			exc.printStackTrace();
+		}finally {
+			if (myConn != null) {
+				try {
+					myConn.close();
+				} catch (SQLException e) {
+					/* ignored */}
+			}
+		}
+			return false;
+
+	}
+	//check if customer email exists in database
+	public static boolean checkCustomerEmailExists(String email) {
+		Connection myConn = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		try {
+
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
+					"sql9232857", "JvbZyaTgLR");
+
+			Statement myStmt = myConn.createStatement();
+
+
+			String query = "select * from Customer where email = '" + email + "'";
+
+			pst = myConn.prepareStatement(query);
+
+			rs = pst.executeQuery();
+
+			// return result
+			
+			String usernameCount;
+			if(rs.next()) {
+				usernameCount = rs.getString("email");
+				if (usernameCount.equalsIgnoreCase(email)){
+					return true;
+				}
+			}
+			
+			return false;
+		}
+
+		catch (Exception exc) {
+			exc.printStackTrace();
+		}finally {
+			if (myConn != null) {
+				try {
+					myConn.close();
+				} catch (SQLException e) {
+					/* ignored */}
+			}
+		}
+			return false;
+
+	}
+	//check if ssn is in database
+	public static boolean checkCustomerSSNExists(String ssn) {
+		Connection myConn = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		try {
+
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
+					"sql9232857", "JvbZyaTgLR");
+
+			Statement myStmt = myConn.createStatement();
+
+		
+			String query = "select * from Customer where ssn = '" + ssn + "'";
+
+			pst = myConn.prepareStatement(query);
+
+			rs = pst.executeQuery();
+
+			// return result
+			
+			String usernameCount;
+			if(rs.next()) {
+				usernameCount = rs.getString("ssn");
+				if (usernameCount.equalsIgnoreCase(ssn)){
+					return true;
+				}
+			}
+			
+			return false;
+		}
+
+		catch (Exception exc) {
+			exc.printStackTrace();
+		}finally {
+			if (myConn != null) {
+				try {
+					myConn.close();
+				} catch (SQLException e) {
+					/* ignored */}
+			}
+		}
+			return false;
+
+	}
+	
 }

@@ -69,31 +69,31 @@ public class AdminManageFlights {
 		JButton btnRemoveFlight = new JButton("Remove Flight");
 		btnRemoveFlight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				//get flight id to be removed from textfield and cast to int
+
+				// get flight id to be removed from textfield and cast to int
 				String idString = txtRemoveFlight.getText();
 				int idNumber = Integer.parseInt(idString);
-				
-				//if the flight exists based on it's id
+
+				// if the flight exists based on it's id
 				if (Queries.checkFlightId(idNumber)) {
-				try {
-					
-					//remove flight using query
-					Queries.removeFlight(idNumber);
-					
-					//show confirmation with pop up
-					JOptionPane.showMessageDialog(null, "flight added", "Success", JOptionPane.INFORMATION_MESSAGE);
-				
-				} catch (Exception exc) {
-					exc.printStackTrace();
-				
-				}
-				}else {
-					
-					//display failure message pop up
+					try {
+
+						// remove flight using query
+						Queries.removeFlight(idNumber);
+
+						// show confirmation with pop up
+						JOptionPane.showMessageDialog(null, "flight removed", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+					} catch (Exception exc) {
+						exc.printStackTrace();
+
+					}
+				} else {
+
+					// display failure message pop up
 					JOptionPane.showMessageDialog(null, "Invalid Flight", "Failure", JOptionPane.ERROR_MESSAGE);
 				}
-				
+
 				txtRemoveFlight.setText("");
 
 			}
@@ -146,8 +146,8 @@ public class AdminManageFlights {
 		JButton btnGo_Back = new JButton("Go Back");
 		btnGo_Back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				//create new admin screen 
+
+				// create new admin screen
 				AdminScreen a1 = new AdminScreen();
 				a1.newScreen();
 				frame.dispose();
@@ -159,11 +159,11 @@ public class AdminManageFlights {
 		JButton btnAddFlight = new JButton("Add Flight");
 		btnAddFlight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				//create new flights object to hold flight data
+
+				// create new flights object to hold flight data
 				Flights f1 = new Flights();
-				
-				//insert flight data to flights class
+
+				// insert flight data to flights class
 				f1.departureCity = txtDepartureCity.getText();
 				f1.departureDate = txtDepartureDate.getText();
 				f1.departureTime = txtDepartureTime.getText();
@@ -171,21 +171,49 @@ public class AdminManageFlights {
 				f1.arrivalDate = txtArrivalDate.getText();
 				f1.arrivalTime = txtArrivalTime.getText();
 
-				//insert data into query to add flight
-				try {
-					Queries.addFlights(f1);
-					
-				} catch (Exception exc) {
-					exc.printStackTrace();
+				VerifyInput v1 = new VerifyInput();
+				//verifying all user inputs to create admin
+				if (v1.departureCityAllLetters(f1) == false) {
+					JOptionPane.showMessageDialog(null, "Enter a valid departure city name", "Error",
+							JOptionPane.ERROR_MESSAGE);
+
+				} else if (v1.verifyDateFormat(f1.getDepartureDate()) == false) {
+					JOptionPane.showMessageDialog(null, "Enter a valid departure date: 00-00-0000", "Error",
+							JOptionPane.ERROR_MESSAGE);
+
+				} else if (v1.verifyTimeFormat(f1.getDepartureTime()) == false) {
+					JOptionPane.showMessageDialog(null, "Enter a valid departure time: 00:00", "Error",
+							JOptionPane.ERROR_MESSAGE);
+
+				} else if (v1.arrivalCityAllLetters(f1) == false) {
+					JOptionPane.showMessageDialog(null, "Enter a valid arrival city name", "Error",
+							JOptionPane.ERROR_MESSAGE);
+
+				} else if (v1.verifyDateFormat(f1.getArrivalDate()) == false) {
+					JOptionPane.showMessageDialog(null, "Enter a valid arrival date: 00-00-0000", "Error",
+							JOptionPane.ERROR_MESSAGE);
+
+				} else if (v1.verifyTimeFormat(f1.getArrivalTime()) == false) {
+					JOptionPane.showMessageDialog(null, "Enter a valid arrival time: 00:00", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+
+					// insert data into query to add flight
+					try {
+						Queries.addFlights(f1);
+
+					} catch (Exception exc) {
+						exc.printStackTrace();
+					}
+					// show success message and make text fields blank
+					JOptionPane.showMessageDialog(null, "flight added", "Success", JOptionPane.INFORMATION_MESSAGE);
+					txtDepartureCity.setText("");
+					txtDepartureDate.setText("");
+					txtDepartureTime.setText("");
+					txtArrivalCity.setText("");
+					txtArrivalDate.setText("");
+					txtArrivalTime.setText("");
 				}
-				//show success message and make text fields blank
-				JOptionPane.showMessageDialog(null, "flight added", "Success", JOptionPane.INFORMATION_MESSAGE);
-				txtDepartureCity.setText("");
-				txtDepartureDate.setText("");
-				txtDepartureTime.setText("");
-				txtArrivalCity.setText("");
-				txtArrivalDate.setText("");
-				txtArrivalTime.setText("");
 
 			}
 		});
@@ -195,7 +223,7 @@ public class AdminManageFlights {
 		JButton btnRefresh = new JButton("Refresh");
 		btnRefresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//refresh screen and show flights
+				// refresh screen and show flights
 				try {
 
 					table.setModel(DbUtils.resultSetToTableModel(Queries.showFLights()));
@@ -215,10 +243,9 @@ public class AdminManageFlights {
 		JButton btnShowAllFlights = new JButton("Show All Flights");
 		btnShowAllFlights.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				//show all flights 
+
+				// show all flights
 				try {
-					
 
 					table.setModel(DbUtils.resultSetToTableModel(Queries.showFLights()));
 

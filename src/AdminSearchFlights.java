@@ -20,6 +20,7 @@ import javax.swing.JComboBox;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.*;
+
 //class for admins to search and book flights
 public class AdminSearchFlights {
 
@@ -80,8 +81,8 @@ public class AdminSearchFlights {
 		JButton btnGo_Back = new JButton("Go Back");
 		btnGo_Back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				//go back to admin main menu
+
+				// go back to admin main menu
 				AdminScreen a1 = new AdminScreen();
 				a1.newScreen();
 				frame.dispose();
@@ -91,43 +92,48 @@ public class AdminSearchFlights {
 		frame.getContentPane().add(btnGo_Back);
 
 		JButton btnBookFlight = new JButton("Book Flight");
-		
+
 		btnBookFlight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				//get flights id from text field and parse to int value
+
+				// get flights id from text field and parse to int value
 				String stringidFlight = txtBookFlight.getText();
 				int idFlight = Integer.parseInt(stringidFlight);
-				
-				//send flight id to queries to gather information
+
+				// send flight id to queries to gather information
 				String departureCity = Queries.fetchDepartureCity(idFlight);
 				String departureDate = Queries.fetchDepartureDate(idFlight);
 				String departureTime = Queries.fetchArrivalTime(idFlight);
 				String arrivalCity = Queries.fetchArrivalCity(idFlight);
 				String arrivalDate = Queries.fetchArrivalDate(idFlight);
 				String arrivalTime = Queries.fetchDepartureTime(idFlight);
-				
-				//check if the flight exists
+
+				// check if the flight exists
 				if (Queries.checkFlightId(idFlight)) {
-				
-					//insert data into bookflight table
+
+					// insert data into bookflight table
 					try {
-					Queries.bookFlight(idFlight, ValueObject.bookingUsername, departureCity, departureDate, departureTime, 
-							arrivalCity,arrivalDate, arrivalTime);
-					
-					//pop up message to confirm booked flight
-					JOptionPane.showMessageDialog(null, "flight booked", "update", JOptionPane.INFORMATION_MESSAGE);
-				
+						if (Queries.checkFlightAlreadyBooked(ValueObject.bookingUsername, idFlight)) {
+							JOptionPane.showMessageDialog(null, "Already booked", "Alert", JOptionPane.ERROR_MESSAGE);
+
+						} else {
+							Queries.bookFlight(idFlight, ValueObject.bookingUsername, departureCity, departureDate,
+									departureTime, arrivalCity, arrivalDate, arrivalTime);
+
+							// pop up message to confirm booked flight
+							JOptionPane.showMessageDialog(null, "flight booked", "update",
+									JOptionPane.INFORMATION_MESSAGE);
+						}
+
 					} catch (Exception exc) {
-					exc.printStackTrace();
+						exc.printStackTrace();
+					}
+
+				} else {
+					// pop up message to show flight doesn't exist
+					JOptionPane.showMessageDialog(null, "Invalid Flight", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-					
-			}else {
-				//pop up message to show flight doesn't exist
-				JOptionPane.showMessageDialog(null, "Invalid Flight", "Error", JOptionPane.ERROR_MESSAGE);
-			}
-				
-				
+
 			}
 		});
 		btnBookFlight.setBounds(427, 377, 117, 29);
@@ -136,10 +142,10 @@ public class AdminSearchFlights {
 		JButton btnShowAllFlights = new JButton("Show all Flights");
 		btnShowAllFlights.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				//show all flights in database using button
+
+				// show all flights in database using button
 				try {
-					//insert flights into table display
+					// insert flights into table display
 					table.setModel(DbUtils.resultSetToTableModel(Queries.showFLights()));
 
 				} catch (Exception exc) {
@@ -166,14 +172,14 @@ public class AdminSearchFlights {
 		JButton btnSearchCity = new JButton("Search");
 		btnSearchCity.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				//get city name from text field
+
+				// get city name from text field
 				String city = txtSearchCity.getText();
-				
-				//if the city exists...
+
+				// if the city exists...
 				if (Queries.checkFlight(city)) {
 					try {
-						//display searched-for city in table display
+						// display searched-for city in table display
 						table.setModel(DbUtils.resultSetToTableModel(Queries.searchByDepartureCity(city)));
 
 					} catch (Exception exc) {
@@ -181,7 +187,7 @@ public class AdminSearchFlights {
 
 					}
 				} else {
-					//show message that city doesn't exist
+					// show message that city doesn't exist
 					JOptionPane.showMessageDialog(null, "Invalid City", "Error", JOptionPane.ERROR_MESSAGE);
 
 				}
@@ -189,17 +195,17 @@ public class AdminSearchFlights {
 		});
 		btnSearchCity.setBounds(427, 281, 117, 29);
 		frame.getContentPane().add(btnSearchCity);
-		
+
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setForeground(Color.BLACK);
 		separator_1.setBackground(Color.BLACK);
 		separator_1.setBounds(6, 347, 588, 16);
 		frame.getContentPane().add(separator_1);
-		
+
 		JLabel lbBookFlight = new JLabel("Book Flight (id)");
 		lbBookFlight.setBounds(104, 382, 117, 16);
 		frame.getContentPane().add(lbBookFlight);
-		
+
 		txtBookFlight = new JTextField();
 		txtBookFlight.setBounds(235, 377, 177, 26);
 		frame.getContentPane().add(txtBookFlight);

@@ -25,8 +25,7 @@ public class ValueObject {
 			this.ssn = ssn;
 			this.question = question;
 			this.answer = answer;
-	
-	}
+		}
 	
 	//constructor to hold the user's username to be used later when booking flights and searching for booked flights
 	public ValueObject(String bookingUsername) {

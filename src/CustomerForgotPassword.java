@@ -77,9 +77,17 @@ public class CustomerForgotPassword extends JFrame{
 				String username = txtUsername.getText();
 				System.out.println(username);
 				
-				//set textfield to display security question based with the user's username as parameter
+				//set textfield to display security question based on the user's username as parameter
+				try {
+				if (Queries.checkCustomerUsernameExists(username) == false) {
+					JOptionPane.showMessageDialog(null, "Username doesn't exist", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 				txtQuestion.setText(Queries.forgotCustomerPassword(username));
 				System.out.println("Break");
+				
+				}catch(Exception exc) {
+					exc.printStackTrace();
+				}
 				
 				//find answer and password from query using user's username as parameter
 				String answer = Queries.customerAnswer(username);
