@@ -98,6 +98,7 @@ public class MainMenu {
 					ans1.setCheckPassword(checkPassword);
 					ans1.setPassword(actualPassword);
 
+					try {
 					if (ans1.Verification()) {
 
 						// create object to hold admins username as class variable
@@ -111,6 +112,11 @@ public class MainMenu {
 						// show wrong password pop up
 					} else {
 						JOptionPane.showMessageDialog(null, "incorrect password", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+					catch (Exception exc) {
+						exc.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Username and Password Not Found", "Error", JOptionPane.ERROR_MESSAGE);
 					}
 					// show miscelaneous login error
 				} catch (Exception exc) {
@@ -159,7 +165,9 @@ public class MainMenu {
 
 					ans1.setCheckPassword(checkPassword);
 					ans1.setPassword(actualPassword);
+					
 
+					try {
 					if (ans1.Verification()) {
 						System.out.println("Login Button for customer pressed");
 
@@ -175,12 +183,17 @@ public class MainMenu {
 					} else {
 						JOptionPane.showMessageDialog(null, "incorrect password", "Error", JOptionPane.ERROR_MESSAGE);
 					}
+					}
+					catch (Exception exc) {
+						exc.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Username and Password Not Found", "Error", JOptionPane.ERROR_MESSAGE);
+					}
 					// show miscelaneous login error
 				} catch (Exception exc) {
 					exc.printStackTrace();
 					JOptionPane.showMessageDialog(null, "Username and Password Not Found", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-
+					
 			}
 		});
 

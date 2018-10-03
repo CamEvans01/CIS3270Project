@@ -1,10 +1,12 @@
 import java.sql.*;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
 //class to hold all queries 
 public class Queries {
+	
 
 	// query to add flight to Flights table using critera from Flights object
 	public static void addFlights(Flights f1) {
@@ -13,8 +15,8 @@ public class Queries {
 		PreparedStatement pst = null;
 		try {
 
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -66,8 +68,8 @@ public class Queries {
 		PreparedStatement pst = null;
 		try {
 
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -120,8 +122,8 @@ public class Queries {
 		ResultSet rs = null;
 		try {
 
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -153,8 +155,8 @@ public class Queries {
 		PreparedStatement pst = null;
 		try {
 
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -194,8 +196,8 @@ public class Queries {
 		PreparedStatement pst = null;
 		try {
 
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -236,8 +238,8 @@ public class Queries {
 		ResultSet rs = null;
 		try {
 
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -268,8 +270,8 @@ public class Queries {
 
 		try {
 
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -299,8 +301,8 @@ public class Queries {
 		ResultSet rs = null;
 		try {
 
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -347,8 +349,8 @@ public class Queries {
 		ResultSet rs = null;
 		try {
 
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -395,8 +397,8 @@ public class Queries {
 		ResultSet rs = null;
 		try {
 
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -443,8 +445,8 @@ public class Queries {
 		PreparedStatement pst = null;
 		try {
 
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -497,8 +499,8 @@ public class Queries {
 		Connection myConn = null;
 		PreparedStatement pst = null;
 		try {
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			// 2. Create the statement
 			Statement myStmt = myConn.createStatement();
@@ -545,8 +547,8 @@ public class Queries {
 		ResultSet rs = null;
 		try {
 
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -593,8 +595,8 @@ public class Queries {
 			PreparedStatement pst = null;
 			ResultSet rs = null;
 			try {
-				myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-						"sql9232857", "JvbZyaTgLR");
+				myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+						"sql9259554", "lQ3CmTHLlj");
 
 				Statement myStmt = myConn.createStatement();
 
@@ -639,8 +641,8 @@ public class Queries {
 		PreparedStatement pst = null;
 		try {
 
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -695,8 +697,8 @@ public class Queries {
 		ResultSet rs = null;
 		try {
 
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -743,8 +745,8 @@ public class Queries {
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		try {
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -787,9 +789,10 @@ public class Queries {
 	public static String fetchAdminPassword(String username) {
 		Connection myConn = null;
 		PreparedStatement pst = null;
+		String password = "";
 		try {
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			// 2. Create the statement
 			Statement myStmt = myConn.createStatement();
@@ -801,8 +804,9 @@ public class Queries {
 			ResultSet rs = pst.executeQuery(query);
 
 			rs.next();
-			String password = rs.getString("password");
-
+			
+			password = rs.getString("password");
+			
 			return password;
 		}
 
@@ -833,8 +837,8 @@ public class Queries {
 		Connection myConn = null;
 		PreparedStatement pst = null;
 		try {
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -882,8 +886,8 @@ public class Queries {
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		try {
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -930,8 +934,8 @@ public class Queries {
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		try {
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -979,8 +983,8 @@ public class Queries {
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		try {
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -1028,8 +1032,8 @@ public class Queries {
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		try {
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -1077,8 +1081,8 @@ public class Queries {
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		try {
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -1125,8 +1129,8 @@ public class Queries {
 		ResultSet rs = null;
 		try {
 
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -1170,8 +1174,8 @@ public class Queries {
 		ResultSet rs = null;
 		try {
 
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -1215,8 +1219,8 @@ public class Queries {
 		ResultSet rs = null;
 		try {
 
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -1260,8 +1264,8 @@ public class Queries {
 		ResultSet rs = null;
 		try {
 
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -1305,8 +1309,8 @@ public class Queries {
 		ResultSet rs = null;
 		try {
 
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -1352,8 +1356,8 @@ public class Queries {
 		ResultSet rs = null;
 		try {
 
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 
@@ -1397,8 +1401,8 @@ public class Queries {
 		ResultSet rs = null;
 		try {
 
-			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9232857?useSSL=false",
-					"sql9232857", "JvbZyaTgLR");
+			myConn = DriverManager.getConnection("jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9259554?useSSL=false",
+					"sql9259554", "lQ3CmTHLlj");
 
 			Statement myStmt = myConn.createStatement();
 

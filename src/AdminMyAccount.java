@@ -157,6 +157,9 @@ public class AdminMyAccount {
 		});
 		btnRefresh.setBounds(477, 387, 117, 29);
 		frame.getContentPane().add(btnRefresh);
-	}
 		
+		JLabel lblAsdff = new JLabel("asdff");
+		lblAsdff.setBounds(64, 67, 61, 16);
+		frame.getContentPane().add(lblAsdff);
+	}
 }
